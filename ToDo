@@ -1,0 +1,36 @@
+=> integrer la gentelella (template)						ok
+	=> js													ok
+	=> css													ok
+	=> separer les éléments (header, sidebar, body)			ok
+
+=> authentification											ok
+	=> simple authentification 								ok
+	=> roles												ok	
+	=> midlware												ok
+
+=> controle d'acces (admin, emplyée...)						ok
+
+=> Manage Data base{										ok
+	=> rename all keys to id								ok
+	=> add timestamps										ok
+	=> add seeds											ok
+}
+
+
+=> complete crud blocs{										ok
+	=>affiche list											ok		
+	=>modfier												ok
+	=>supprimer												ok
+	=>ajouter												ok
+	=>export, import, print, excel, pdf						ok
+	=>validate forms										ok
+}									
+
+=> personaliser alerts										ok
+=> loading effect 											ok
+
+=> manage code												ok
+
+=> gestion app
+__________________________________________________________________
+------------------------------------------------------------------
