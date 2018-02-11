@@ -31,30 +31,27 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user()->role == 'etudiant'){
-            $user = User::find( Auth::user()->id );
-            if($user->dossier){
 
-                
+            return redirect('/etudiant');
 
-                return view('etudiant.index');
-
-            }
-            else{
-                $villes = Ville::all();
-                return view('etudiant.inscription',['villes' => $villes]);
+        }else if(Auth::user()->role == 'admin') {
             
-            }
-        }else{
-            return view('home');
+            return redirect('/admin');
+
+        }else if(Auth::user()->role == 'employe') {
+            
+            return redirect('/employe');
+            
         }
+
     }
 
     public function downloadrRECU()
     {
-
-        $pdf = PDF::loadView('etudiant.recu');
-
-        return $pdf->download('recu.pdf');
+        
+        $this->middleware('ChekRole:etudiant');
+        $pdf = PDF::loadView('etudiant.dossier.recu');
+        return $pdf->download('recu_' . Auth::user()->id . '.pdf');
 
     }
 }

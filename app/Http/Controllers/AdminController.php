@@ -9,11 +9,13 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        
+        $this->middleware('auth');
+    	$this->middleware('ChekRole:admin');
+       
     }
 
     public function index()
     {
-        dd('admin Controller');
+        return view('admin.index');
     }
 }

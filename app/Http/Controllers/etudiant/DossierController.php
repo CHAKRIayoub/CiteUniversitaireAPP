@@ -17,7 +17,7 @@ class DossierController extends Controller
     public function index()
     {
         // $dossier = Dossier::where('user_id', Auth::user()->id)->first();
-        return view('etudiant.index');
+        return view('etudiant.dossier.index');
         // , ['dossier' => $blocs] );
     }
    
@@ -86,7 +86,7 @@ class DossierController extends Controller
     public function edit($id)
     {
         $villes = Ville::all();
-        return view('etudiant.edit',['villes' => $villes]);
+        return view('etudiant.dossier.edit',['villes' => $villes]);
     }
 
 

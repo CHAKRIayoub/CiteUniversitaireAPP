@@ -9,11 +9,12 @@ class EmployeController extends Controller
     
     public function __construct()
     {
-        
+    	$this->middleware('auth');
+    	$this->middleware('ChekRole:employe');  
     }
 
     public function index()
     {
-        dd('employe Controller');
+        return view('employe.index');
     }
 }

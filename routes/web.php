@@ -24,7 +24,9 @@ Route::get('/', function () {return view('welcome'); });
 	    
 	    Route::get('/admin', 'AdminController@index' );
 
-	    Route::resource('/regles', 'admin\\RegleController');
+	    Route::resource(	'/regles',
+	    					'admin\\RegleController',
+	    					['except' => ['destroy','show','create']]);
 	   
 	});
 
@@ -32,18 +34,13 @@ Route::get('/', function () {return view('welcome'); });
 
 
 
-	// ----------------------------------------------------------------Employée Routes
+	// ----------------------------------------------------------Employée and admin Routes
 
 	Route::middleware(['auth','ChekRole:employe,admin'])->group(function () {
 	    
 	    Route::get('/employe', 'EmployeController@index' );
 
 	    Route::resource('/blocs', 'employe\\BlocController', ['except' => ['show']]);
-
-	     //Route::resource('/blocs', 'BlocController');
-
-		// Route::get('/blocs', 'employe\\BlocController@index');
-
 	    
 	});
 
@@ -55,13 +52,14 @@ Route::get('/', function () {return view('welcome'); });
 
 	Route::middleware(['auth','ChekRole:etudiant'])->group(function () {
 	    
-		 Route::get('/etudiant', 'EtudiantController@index' );
+		Route::get('/etudiant', 'EtudiantController@index' );
 		 
-		 Route::resource('/dossier', 'etudiant\\DossierController', ['except' => ['destroy','show','create']]);
+		Route::resource(	'/dossier',
+		 				 	'etudiant\\DossierController', 
+		 				 	['except' => ['destroy','show','create']]
+		);
 		 
-		 Route::get("/recu","HomeController@downloadrRECU");
-
-
+		Route::get("/recu","HomeController@downloadrRECU");
 
 	});
 
