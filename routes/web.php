@@ -26,7 +26,11 @@ Route::get('/', function () {return view('welcome'); });
 
 	    Route::resource(	'/regles',
 	    					'admin\\RegleController',
-	    					['except' => ['destroy','show','create']]);
+	    					['except' => ['destroy','show','create','store','edit']]);
+
+	    Route::resource(	'/app',
+	    					'admin\\AppController',
+	    					['except' => ['destroy','show','create','store','edit']]);
 	   
 	});
 
