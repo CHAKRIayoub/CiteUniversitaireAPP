@@ -250,5 +250,11 @@ class DatabaseSeeder extends Seeder
                 'factor' => 3
             ]
         );
+
+        DB::table('application')->insert([
+                'date_d' => '2018-08-01',
+                'date_f' => '2018-09-01'
+            ]
+        );
     }
 }

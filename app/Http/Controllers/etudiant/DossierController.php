@@ -8,7 +8,7 @@ use \Auth;
 use App\User;
 use App\Dossier;
 use Session;
-use App\Ville;
+use App\Ville; 
 
 
 class DossierController extends Controller

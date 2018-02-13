@@ -129,7 +129,7 @@
                 <div class="links">
 
                     <H1><strong>Faire une demande de logemen</strong> </H1><br><br>
-                    <a  href="login#toregister"   class="my-btn" href="">Inscription</a>
+                    <a  href="/login#toregister"   class="my-btn" href="">Inscription</a>
                 </div>
               
             </div>

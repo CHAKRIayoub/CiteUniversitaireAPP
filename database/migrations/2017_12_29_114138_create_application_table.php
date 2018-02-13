@@ -16,10 +16,10 @@ class CreateApplicationTable extends Migration
         Schema::create('application', function (Blueprint $table) {
         
 
-            // $table->increments('id');
-            // $table->Date('date_d_inscription');
-            // $table->Date('date_f_inscription');
-            // $table->timestamps();
+            $table->increments('id');
+            $table->Date('date_d');
+            $table->Date('date_f');
+            $table->timestamps();
             
         });
     }

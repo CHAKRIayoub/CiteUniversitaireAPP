@@ -15,10 +15,10 @@ class CreateDossiersTable extends Migration
         Schema::create('dossiers', function (Blueprint $table) {
                             $table->increments('id');
                             $table->integer('user_id');
-                             $table->integer('ville_id');
+                            $table->integer('ville_id');
                             $table->integer('cne');
                             $table->String('cin');
-                            $table->String('lieu_naissance');
+                            $table->Date('lieu_naissance');
                             $table->Date('date_naissance');
                             $table->String('genre');
                             $table->String('nom');

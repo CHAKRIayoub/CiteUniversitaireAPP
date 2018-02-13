@@ -1,3 +1,4 @@
+
 @extends('layouts.template')
 
 @section('content')
@@ -12,7 +13,6 @@
     }
 
 </style>
-
 
 <!-- __________________________HTML_____________________________________________ -->
 
@@ -95,7 +95,7 @@
                                     <td>Date de Début d'inscription :</td>
                                     <td>
                                         
-                                        <input class="form-control" type="date" name="ddi" value="{{ $dates['debut_inscription'] }}" >
+                                        <input class="form-control" type="date" name="ddi" value="{{ $app->date_d }}" >
 
                                     </td>
                                 </tr>
@@ -105,7 +105,7 @@
                                     <td>
                                         
                                         <input class="form-control" type="date" name="dfi" 
-                                        value="{{ $dates['fin_inscription'] }}" >
+                                        value="{{ $app->date_f }}" >
 
                                     </td>
                                 </tr>
