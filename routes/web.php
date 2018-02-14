@@ -42,6 +42,8 @@ Route::middleware(['auth','ChekRole:employe,admin'])->group(function () {
 
   	Route::resource('/internes', 'employe\\InternesController');
 
+	Route::resource('/chambres','employe\\ChambresController');
+
     
 });
 
