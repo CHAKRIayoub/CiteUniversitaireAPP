@@ -16,7 +16,7 @@
     <style type="text/css">
       
 
-         html, body {
+            html, body {
                 background-image: url(' {{ asset("images/bg.jpg") }} ');
                 color: #fff;
                 font-family: calibri light;
@@ -108,7 +108,7 @@
     </style>
 
 
-    <body background="" >
+    <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right">
@@ -123,7 +123,7 @@
 
             <div class="content">
                 <div class="title m-b-md" >
-                    <img height="200px" src="{{ asset("images/logo.png") }}">
+                    Cité Universitaire
                 </div>
 
                 <div class="links">

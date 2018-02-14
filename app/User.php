@@ -30,12 +30,16 @@ class User extends Authenticatable
     public function getRole()
     {
         return $this->role;
-
     }
 
     public function dossier()
     {
         return $this->hasOne('App\Dossier');
+    }
+
+    public function hebergement()
+    {
+        return $this->hasOne('App\Hebergement');
     }
 
    

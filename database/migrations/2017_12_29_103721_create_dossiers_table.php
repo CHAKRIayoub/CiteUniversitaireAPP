@@ -18,7 +18,7 @@ class CreateDossiersTable extends Migration
                             $table->integer('ville_id');
                             $table->integer('cne');
                             $table->String('cin');
-                            $table->Date('lieu_naissance');
+                            $table->String('lieu_naissance');
                             $table->Date('date_naissance');
                             $table->String('genre');
                             $table->String('nom');

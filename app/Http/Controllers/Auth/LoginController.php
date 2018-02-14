@@ -34,7 +34,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('AppDates');
+        // $this->middleware('AppDates');
         $this->middleware('guest')->except('logout');
     }
 }

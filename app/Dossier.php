@@ -1,47 +1,73 @@
 <?php
 
-
 namespace App;
 use App\Regle;
-
-
+use App\User;
+use App\Bloc;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Dossier extends Model
 {
+	public static function list_accpt(){
 
+		$blocs = Bloc::all();
+        $somme = 0;
 
-	protected $fillable = [
-			'user_id',
-			'cne',
-			'cin',
-			'lieu_naissance',
-			'date_naissance',
-			'genre',
-			'nom',
-			'prenom',
-			'adresse',
-			'ville_id',
-			'telephone',
-			'annee_bac',
-			'mention',
-			'cycle',
-			'etablissement',
-			'handicape',
-			'maladie',
-			'nom_pere',
-			'cin_pere',
-			'nom_mere',
-			'cin_mere',
-			'revenue',
-			'nb_enfants',
-			'note_dossier'
-    ];
+        foreach ($blocs as $key => $bloc) {
+            $chamberes = $bloc->chamberes;
+            foreach ($chamberes as $key => $chambere) {
+                $somme += $chambere->capacite;
+            }
+        }
 
+        $var = User::has('hebergement')->get();
+        $somme -= $var->count();
 
-    public function user()
+        $var = User::doesntHave('hebergement')->get();
+        $etudiants = array( );
+        $dossiers = array();
+
+        foreach ($var as $key => $user) {
+            if($user->role == "etudiant" && $user->dossier != null ){
+                $etudiants[] = $user;
+                $dossiers[] = $user->dossier;
+            }
+        }
+
+        $pos1 = 0;
+        $pos2 = 0;
+
+        while($pos1 <= count($dossiers) - 1 ){
+            
+            $max = $dossiers[$pos1];
+            $pos_max = $pos1;
+            
+            for ($i = $pos1 + 1; $i <= count($dossiers) - 1; $i++){
+                if ($max['note_dossier'] < $dossiers[$i]['note_dossier']){
+                    $pos_max =  $i;
+                    $max = $dossiers[$i];
+                }
+            }
+
+            $pos2 = $pos_max;
+            $aide = $dossiers[$pos2];
+            $dossiers[$pos2] = $dossiers[$pos1];
+            $dossiers[$pos1] = $aide;
+            $pos1++;
+        }
+
+        $selected_dossiers = array();
+        for ($i=0; $i < $somme ; $i++) {
+        	if($i > count($dossiers) - 1){ break;  }
+        	$selected_dossiers[] = $dossiers[$i];   
+        }
+
+        return $selected_dossiers;
+
+	}
+
+	public function user()
     {
         return $this->belongsTo('App\User');
     }
@@ -78,5 +104,36 @@ class Dossier extends Model
            
     }
 
+
+
+	protected $fillable = [
+			'user_id',
+			'cne',
+			'cin',
+			'lieu_naissance',
+			'date_naissance',
+			'genre',
+			'nom',
+			'prenom',
+			'adresse',
+			'ville_id',
+			'telephone',
+			'annee_bac',
+			'mention',
+			'cycle',
+			'etablissement',
+			'handicape',
+			'maladie',
+			'nom_pere',
+			'cin_pere',
+			'nom_mere',
+			'cin_mere',
+			'revenue',
+			'nb_enfants',
+			'note_dossier'
+    ];
+
+
+   
 
 }

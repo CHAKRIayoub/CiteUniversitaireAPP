@@ -9,6 +9,10 @@
 
   <title>Connexion</title>
 
+  <style type="text/css">
+      
+  </style>
+
   <!-- Bootstrap core CSS -->
 
   <link href="{{ asset("css/bootstrap.min.css") }}" rel="stylesheet">
@@ -100,10 +104,13 @@
         <!-- content -->
       </div>
 
-
+         
 
       <div id="register" class="animate form">
+
+ @if((strtotime(date('y-m-d')) >= strtotime($app->date_d)) && (strtotime($app->date_f) >= strtotime(date('y-m-d'))) )  
         <section class="login_content">
+          
            <form method="POST" action="{{ route('register') }}" >
             {{ csrf_field() }}
             <h1>Cité Universitaire</h1>
@@ -163,9 +170,29 @@
             
             </div>
           </form>
+           
         </section>
+
+
         <!-- content -->
+         @else
+
+<img src="{{ asset("images/error.jpg") }}" width="350px" >
+<!-- <div class="panel panel-default">
+  <div class="panel-body" >
+    <h2 style=" font-family: calibri light; color: red; " >la délai (entre le {{ $app->date_d}} et le {{ $app->date_f }} ) d'inscription était expiré </h2>
+    </div>
+</div> -->
+<p class="change_link">
+  Vous avez un Compte ? <a  href="#tologin" class="">Connexion</a>
+</p>
+
+
+        @endif
       </div>
+
+      
+   
     </div>
   </div>
 

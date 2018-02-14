@@ -15,7 +15,7 @@ class AppDates
         $datef = strtotime($app->date_f);
         $datec = strtotime(date('y-m-d'));
         
-        if ( ($datec >= $dated) && ($datef >= $datec )){
+        if ( ($datec >= $dated) && ($datef >= $datec ) ){
 
             return $next($request);
 

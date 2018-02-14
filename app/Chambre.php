@@ -16,4 +16,9 @@ class Chambre extends Model
         return $this->belongsTo('App\Bloc');
     }
 
+    public function hebergement()
+    {
+        return $this->belongsTo('App\Hebergement');
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Auth;
 use App\User;
+use App\Ville;
 
 
 class EtudiantController extends Controller

@@ -18,9 +18,6 @@ class Hebergement extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('chambre_id');
-            $table->Date('date_d');
-            $table->String('nom_urgence');
-            $table->bigInteger('gsm_urgence');
             $table->timestamps();
             
         });
