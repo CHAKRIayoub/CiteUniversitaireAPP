@@ -36,60 +36,40 @@
 
         <div class="x_content">
 <br><br>
-         <div class="col-md-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>liste des chambres<small>listé par :</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <br />
-
-                <form name="form" id ="select" method="post">
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Genre : </label>
-                      <div class="col-md-9 col-sm-9 col-xs-12">
-
-
-
-                        <select class="form-control" id="table-filter">
-                          <option value="">Tout</option>
-                          <option>masculin</option>
-                          <option>feminin</option>
-                        </select>
-                      </div>
-                    </div>
-                  </form>
-                    </div>
-                  </div>
-                  </div>
 
 
             <table class="table table-striped table-bordered" id="example" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Genre</th>
                         <th>Bloc</th>
                         <th>Capacité</th>
-                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($chambres as $chambre)
                         <tr>
-                            <td>{{ $chambre->id }}</td>
-                            <td> {{ $chambre->Bloc['genre'] }} </td>
-                            <td>{{ $chambre->Bloc['titre'] }}</td>
-                            <td>{{ $chambre->capacite }}</td>
-                            <td>{{ $chambre->created_at }}</td>
-                            <td>
+                            <td style='text-align:center;'><strong>
+                              {{ $chambre->id }}</strong>
+                            </td>
+                            
+                            <td style='text-align:center;'> <a href="/blocs" >
+                              {{ $chambre->Bloc['titre'] }}
+                            </a> </td>
+
+                            <td style='text-align:center;'>{{ $chambre->capacite }}</td>
+                            
+                            <td style='text-align:center;'>
+
+                              <!-- ____________  button Detail ___________ -->
+                                <a href="{{ url('chambres/' .$chambre->id) }}" 
+                                   class="btn btn-success" >
+                                    <i class="fa fa-list-alt"></i> Detail
+                                </a>
+                                
+                                <!-- ____________  formulaire supprimer ___________ -->
+
                                 <!-- ____________  button modifier ___________ -->
                                 <a href="{{ url('chambres/' .$chambre->id. '/edit') }}" 
                                    class="btn btn-primary" >

@@ -32,8 +32,70 @@
         @endif
 
         <div class="x_content">
-            <p class="text-muted font-13 m-b-30">liste des blocs</p>
+            <div class="panel panel-info">
+              <div class="panel panel-heading">Liste Des Etudiants Selectioné genre : Masculin</div>
+              <div class="panel panel-body" >
+            <!-- ____________  table liste des blocs ___________ -->
+            <table id="datatable-buttonss" class="table display table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>CNE</th>
+                        <th>CIN</th>
+                        <th>Note</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dossiers_b as $dossier)
+                        <tr>
+                            <td>{{ $dossier->id }}</td>
+                            <td>{{ $dossier->nom }}</td>
+                            <td>{{ $dossier->prenom }}</td>
+                            <td>{{ $dossier->cne }}</td>
+                            <td>{{ $dossier->cin }}</td>
+                            <td>{{ $dossier->note_dossier }}</td>
+                            <td>
 
+                              <a href="/reserver/{{ $dossier->user->id }}" 
+                                class="btn btn-success">
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                à payé
+                              </a>
+
+                              <a href="/inscriptions/{{ $dossier->id }}" 
+                                class="btn btn-info">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Afficher plus
+                              </a>
+
+                               <!-- ___________  formulaire supprimer _________ -->
+                              {!! Form::open([
+                                  'method' => 'DELETE',
+                                  'url' => ['inscriptions', $dossier->id  ],
+                                  'style' => 'display:inline',
+                                  'id' => $dossier->id,
+                              ]) !!}
+                              <button  
+                                onclick=" app.del({{ $dossier->id }}); return false;"
+                                type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
+                              </button>
+                              {!! Form::close() !!}
+
+                               
+                            </td>      
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+          </div>
+        </div><br><br><br><br>
+
+        <div class="panel panel-info">
+              <div class="panel panel-heading">Liste Des Etudiants Selectioné genre : Masculin</div>
+              <div class="panel panel-body" >
             <!-- ____________  table liste des blocs ___________ -->
             <table id="datatable-buttons" class="table table-striped table-bordered">
                 <thead>
@@ -48,7 +110,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dossiers as $dossier)
+                    @foreach ($dossiers_g as $dossier)
                         <tr>
                             <td>{{ $dossier->id }}</td>
                             <td>{{ $dossier->nom }}</td>
@@ -58,27 +120,46 @@
                             <td>{{ $dossier->note_dossier }}</td>
                             <td>
 
-                              <button type="submit" class="btn btn-danger">
+                              <a href="/reserver/{{ $dossier->user->id }}" 
+                                class="btn btn-success">
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                                à payé
+                              </a>
+
+                              <a href="/inscriptions/{{ $dossier->id }}" 
+                                class="btn btn-info">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Afficher plus
+                              </a>
+
+                               <!-- ___________  formulaire supprimer _________ -->
+                              {!! Form::open([
+                                  'method' => 'DELETE',
+                                  'url' => ['inscriptions', $dossier->id  ],
+                                  'style' => 'display:inline',
+                                  'id' => $dossier->id,
+                              ]) !!}
+                              <button  
+                                onclick=" app.del({{ $dossier->id }}); return false;"
+                                type="submit" class="btn btn-danger">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
                               </button>
+                              {!! Form::close() !!}
 
-                              <button type="submit" class="btn btn-info">
-                                <i class="fa fa-eye" aria-hidden="true"></i> Afficher plus
-                              </button>
                                
                             </td>      
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
+          </div>
+        </div>
         </div>
 
     </div>
 
     <!-- ____________  modal confirmation supprimer ___________ -->
     <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
-        <h4>voulez-vous vraiment supprimer le bloc "<strong>@{{ blocName }}</strong>" ?</h4>
+        <h4>voulez-vous vraiment supprimer ce dossier ?</h4>
     </modal>
 
     <!-- ____________  chrgement ___________ -->
@@ -172,7 +253,6 @@
             show: false, 
             delvar: false,
             idtodel: '',
-            blocName: " ",
             chargement: true
         },
         methods:{
@@ -250,6 +330,58 @@
         }
       }
     }();
+
+    var handleDataTableButtonss = function() {
+      "use strict";
+      0 !== $("#datatable-buttonss").length && $("#datatable-buttonss").DataTable({
+        dom: "Bfrtip",
+        buttons: [{
+          extend: "copy",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "csv",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "excel",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "pdf",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "print",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }],
+        responsive: !0
+      })
+    },
+    TableManageButtonss = function() {
+      "use strict";
+      return {
+        init: function() {
+          handleDataTableButtonss()
+        }
+      }
+    }();
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -270,6 +402,7 @@
     });
   });
   TableManageButtons.init();
+  TableManageButtonss.init();
 </script>
 
 @endsection

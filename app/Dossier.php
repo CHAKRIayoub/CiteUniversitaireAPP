@@ -9,30 +9,48 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dossier extends Model
 {
-	public static function list_accpt(){
+	public static function list_accpt($genre){
 
-		$blocs = Bloc::all();
+        $blocs = Bloc::where('genre', '=', $genre)->get();
         $somme = 0;
 
         foreach ($blocs as $key => $bloc) {
-            $chamberes = $bloc->chamberes;
+            $chamberes = $bloc->chambres;
             foreach ($chamberes as $key => $chambere) {
                 $somme += $chambere->capacite;
             }
         }
 
-        $var = User::has('hebergement')->get();
-        $somme -= $var->count();
 
-        $var = User::doesntHave('hebergement')->get();
-        $etudiants = array( );
+
+        $var1 = User::has('hebergement')->get();
+        $tab = array();
+        foreach ($var1 as $key => $value) {
+            if($value->role == "etudiant" && $value->dossier != null ){
+                if ($value->dossier->genre == $genre) {
+                    $tab[] = $value;
+                }
+            }
+        }
+        $somme -= count($tab);
+
+        $var2 = User::doesntHave('hebergement')->get();
+        $var = array();
+        foreach ($var2 as $key => $value) {
+            if($value->role == "etudiant" && $value->dossier != null ){
+                if ($value->dossier->genre == $genre) {
+                    $var[] = $value;
+                }
+            }
+        }
+
+
+        $etudiants = array();
         $dossiers = array();
 
         foreach ($var as $key => $user) {
-            if($user->role == "etudiant" && $user->dossier != null ){
                 $etudiants[] = $user;
                 $dossiers[] = $user->dossier;
-            }
         }
 
         $pos1 = 0;
@@ -59,13 +77,19 @@ class Dossier extends Model
 
         $selected_dossiers = array();
         for ($i=0; $i < $somme ; $i++) {
-        	if($i > count($dossiers) - 1){ break;  }
-        	$selected_dossiers[] = $dossiers[$i];   
+            if($i > count($dossiers) - 1){ break;  }
+            $selected_dossiers[] = $dossiers[$i];   
         }
 
         return $selected_dossiers;
 
 	}
+
+    public static function list_accpt_boy(){
+
+
+
+    }
 
 	public function user()
     {

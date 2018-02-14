@@ -67,7 +67,7 @@
                                 <!-- ____________  formulaire supprimer ___________ -->
                                 {!! Form::open([
                                     'method' => 'DELETE',
-                                    'url' => ['blocs', $bloc->id  ],
+                                    'url' => ['inscriptions', $bloc->id  ],
                                     'style' => 'display:inline',
                                     'id' => $bloc->id,
                                 ]) !!}

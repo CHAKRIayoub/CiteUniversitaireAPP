@@ -12,7 +12,7 @@
         	<i class="fa fa-home"></i> gestion des chambres
         </a></li>
 
-        <li><a href="/dossiers" >
+        <li><a href="/inscriptions" >
         	<i class="fa fa-file"></i> gestion des dossiers
         </a></li>
 

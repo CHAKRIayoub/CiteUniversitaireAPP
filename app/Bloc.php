@@ -11,7 +11,7 @@ class Bloc extends Model
          'titre', 'genre',
     ];
 
-    public function chamberes()
+    public function chambres()
     {
         return $this->hasMany('App\Chambre');
     }

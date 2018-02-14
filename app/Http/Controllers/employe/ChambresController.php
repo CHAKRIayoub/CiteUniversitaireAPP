@@ -4,23 +4,22 @@ namespace App\Http\Controllers\employe;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Chambre;
 use App\Bloc;
+use App\Hebergement;
+use Session;
+
 
 class ChambresController extends Controller
 {
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+     public function index()
     {
         //
-        // $chambres = Chambre::all();
-        // return view('admin.Chambre.index', ['chambres' => $chambres] );
+
         $chambres = Chambre::all();
         $blocs = Bloc::all();
+
 
         return view('employe.chambres.index', ['chambres' => $chambres,'blocs'=>$blocs] );
     }
@@ -72,7 +71,17 @@ class ChambresController extends Controller
     public function show($id)
     {
         //
-          
+
+
+            $chambre = Chambre::findOrFail($id);
+            $hebergements = Hebergement::where('chambre_id', '=', $id)->get();
+            $hebergementsCount = $hebergements->count();
+
+           return view('employe.chambres.show',
+            ['chambre' => $chambre ,
+            'hebergs' => $hebergements , 
+            'hebergementsCount' =>  $hebergementsCount]);
+
     }
 
     /**

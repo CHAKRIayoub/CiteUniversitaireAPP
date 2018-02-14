@@ -44,7 +44,8 @@ Route::middleware(['auth','ChekRole:employe,admin'])->group(function () {
 
 	Route::resource('/chambres','employe\\ChambresController');
 
-    
+	Route::get('/reserver/{id}','employe\\InscriptionsController@reserver');
+
 });
 
 // ----------------------------------------------------------------Etudiant Routes
