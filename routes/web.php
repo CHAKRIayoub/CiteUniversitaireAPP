@@ -27,6 +27,8 @@ Route::middleware(['auth','ChekRole:admin'])->group(function () {
     Route::resource('/regles', 'admin\\RegleController', ['except' => ['destroy','show','create','store','edit']]);
 
     Route::resource('/app', 'admin\\AppController', ['except' => ['destroy','show','create','store','edit']]);
+
+    Route::resource('/utilisateurs','admin\\UtilisateursController');
    
 });
 
@@ -58,4 +60,7 @@ Route::middleware(['auth','ChekRole:etudiant'])->group(function () {
 	 
 	Route::get("/recu","HomeController@downloadrRECU");
 
+	Route::get("/resultat","EtudiantController@resultat");
+
+	Route::resource("/changement","etudiant\\ChangementController@resultat");
 });

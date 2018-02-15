@@ -10,14 +10,11 @@
     <!-- ____________ content titre ___________ -->
     <div class="page-title">
         <div class="title_left">
-            <h3>Gestion des Blocs</h3> 
+            <h3>Gestion des Internes</h3> 
         </div>
     </div>
 
-    <!-- ____________ Button Ajouter bloc ___________ -->
-    <a href="{{ route('blocs.create') }}" style="float: right" class="btn btn-success" >
-        <i class="fa fa-plus"> </i>  Ajouter Un Bloc
-    </a>
+   
 
     <div class="clearfix"></div>        
 
@@ -35,59 +32,63 @@
         @endif
 
         <div class="x_content">
-            <p class="text-muted font-13 m-b-30">liste des blocs</p>
-
+            <div class="panel panel-info">
+             
+              <div class="panel panel-body" >
             <!-- ____________  table liste des blocs ___________ -->
-            <table id="datatable-buttons" class="table table-striped table-bordered">
+            <table id="datatable-buttonss" class="table display table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Titre</th>
-                        <th>Nombres_des_chambres</th>
-                        <th>Genre</th>
-                        <th>Date</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>CNE</th>
+                        <th>CIN</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($blocs as $bloc)
+                    @foreach ($dossiers as $dossier)
                         <tr>
-                            <td>{{ $bloc->id }}</td>
-                            <td>{{ $bloc->titre }}</td>
-                            <td>{{ $bloc->chamberes_count }}</td>
-                            <td>{{ $bloc->genre }}</td>
-                            <td>{{ $bloc->created_at }}</td>
+                            <td>{{ $dossier->id }}</td>
+                            <td>{{ $dossier->nom }}</td>
+                            <td>{{ $dossier->prenom }}</td>
+                            <td>{{ $dossier->cne }}</td>
+                            <td>{{ $dossier->cin }}</td>
                             <td>
-                                <!-- ____________  button modifier ___________ -->
-                                <a href="{{ url('blocs/' .$bloc->id. '/edit') }}" 
-                                   class="btn btn-primary" >
-                                    <i class="fa fa-edit"></i> Modifier
-                                </a>
-                                
-                                <!-- ____________  formulaire supprimer ___________ -->
-                                {!! Form::open([
-                                    'method' => 'DELETE',
-                                    'url' => ['blocs', $bloc->id  ],
-                                    'style' => 'display:inline',
-                                    'id' => $bloc->id,
-                                ]) !!}
 
-                                    <!-- ____________  button supprimer ___________ -->
-                                    <button type="submit" class="btn btn-danger" 
-                                            onclick="app.blocName='{{ $bloc->titre }}';
-                                                     app.del({{ $bloc->id }});
-                                                     return false;">
+                              <a href="/internes/{{ $dossier->user_id }}" 
+                                class="btn btn-success">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Afficher plus
+                              </a>
 
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
-                                    
-                                    </button>
-                                   
-                                {!! Form::close() !!}
+                              <!-- <a href="/internes/{{ $dossier->id }}/edit" 
+                                class="btn btn-info">
+                                <i class="fa fa-edit" aria-hidden="true"></i> Modifier
+                              </a> -->
+
+                               <!-- ___________  formulaire supprimer _________ -->
+                              {!! Form::open([
+                                  'method' => 'DELETE',
+                                  'url' => ['internes', $dossier->id  ],
+                                  'style' => 'display:inline',
+                                  'id' => $dossier->id,
+                              ]) !!}
+                              <button  
+                                onclick=" app.del({{ $dossier->id }}); return false;"
+                                type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
+                              </button>
+                              {!! Form::close() !!}
+
+                               
                             </td>      
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+          </div>
+        </div><br><br><br><br>
 
         </div>
 
@@ -95,7 +96,7 @@
 
     <!-- ____________  modal confirmation supprimer ___________ -->
     <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
-        <h4>voulez-vous vraiment supprimer le bloc "<strong>@{{ blocName }}</strong>" ?</h4>
+        <h4>voulez-vous vraiment supprimer ce dossier ?</h4>
     </modal>
 
     <!-- ____________  chrgement ___________ -->
@@ -189,7 +190,6 @@
             show: false, 
             delvar: false,
             idtodel: '',
-            blocName: " ",
             chargement: true
         },
         methods:{
@@ -226,7 +226,7 @@
           exportOptions: {
                 columns: [0,1,2,3,4] 
           },
-          title: "liste_blocs"
+          title: "liste_internes"
         }, {
           extend: "csv",
           className: "btn btn-info",
@@ -267,6 +267,58 @@
         }
       }
     }();
+
+    var handleDataTableButtonss = function() {
+      "use strict";
+      0 !== $("#datatable-buttonss").length && $("#datatable-buttonss").DataTable({
+        dom: "Bfrtip",
+        buttons: [{
+          extend: "copy",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "csv",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "excel",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "pdf",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }, {
+          extend: "print",
+          className: "btn btn-info",
+          exportOptions: {
+                columns: [0,1,2,3,4] 
+          },
+          title: "liste_blocs"
+        }],
+        responsive: !0
+      })
+    },
+    TableManageButtonss = function() {
+      "use strict";
+      return {
+        init: function() {
+          handleDataTableButtonss()
+        }
+      }
+    }();
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -287,6 +339,7 @@
     });
   });
   TableManageButtons.init();
+  TableManageButtonss.init();
 </script>
 
 @endsection

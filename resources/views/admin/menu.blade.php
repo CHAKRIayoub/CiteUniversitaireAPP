@@ -16,12 +16,20 @@
         	<i class="fa fa-file"></i> gestion des dossiers
         </a></li>
 
+        <li><a href="/internes" >
+            <i class="fa fa-group"></i> gestion des Internes
+        </a></li>
+
         <li><a href="/regles" >
         	<i class="fa fa-balance-scale"></i> gestion des régles
         </a></li>
 
         <li><a href="/app" >
         	<i class="fa fa-cogs"></i> gestion d'application
+        </a></li>
+
+        <li><a href="/utilisateurs" >
+            <i class="fa fa-users"></i> gestion des utilisateurs
         </a></li>
     
     </ul>

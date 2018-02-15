@@ -7,24 +7,33 @@
 <!-- ____________________ content ________________________ -->
 <div class="right_col" role="main" id="app"> 
   
-    <!-- ____________ content titre ___________ -->
-    <div class="page-title">
-        <div class="title_left">
-            <h3>Gestion des Blocs</h3> 
-        </div>
-    </div>
+     <div class="left_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+            
+            </div>
 
-    <!-- ____________ Button Ajouter bloc ___________ -->
-    <a href="{{ route('blocs.create') }}" style="float: right" class="btn btn-success" >
-        <i class="fa fa-plus"> </i>  Ajouter Un Bloc
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel" style="height:700px;">
+                <div class="x_title">
+                      <a href="{{ route('utilisateurs.create') }}" style="float: right" class="btn btn-success" >
+        <i class="fa fa-plus"> </i>  Ajouter un employé
     </a>
+                  <h3><i class="fa fa-user"> </i> Gestion des employes</h3>
+                 
+                  <div class="clearfix"></div>
 
-    <div class="clearfix"></div>        
+                </div>
 
-    <!-- ____________ content body ___________ -->
-    <div class="row">
+                  <div class="row">
 
-        <!-- ____________  alert ___________ -->
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -34,48 +43,64 @@
         </div>
         @endif
 
-        <div class="x_content">
-            <p class="text-muted font-13 m-b-30">liste des blocs</p>
 
-            <!-- ____________  table liste des blocs ___________ -->
-            <table id="datatable-buttons" class="table table-striped table-bordered">
+
+        <div class="x_content">
+<br><br>
+         
+
+            <table class="table table-striped table-bordered" id="example" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Titre</th>
-                        <th>Nombres_des_chambres</th>
-                        <th>Genre</th>
-                        <th>Date</th>
-                        <th>Actions</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Date Creation</th>
+                        <th>Dernier Modification</th>
+
+                        <th>Action</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($blocs as $bloc)
+                    @foreach ($utilisateurs as $user)
                         <tr>
-                            <td>{{ $bloc->id }}</td>
-                            <td>{{ $bloc->titre }}</td>
-                            <td>{{ $bloc->chamberes_count }}</td>
-                            <td>{{ $bloc->genre }}</td>
-                            <td>{{ $bloc->created_at }}</td>
-                            <td>
+                            <td style='text-align:center;'><strong>{{ $user->id }}</strong></td>
+                            <td style='text-align:center;'> {{ $user->name }} </td>
+                            <td style='text-align:center;'>{{ $user->email }}</td>
+                            <td style='text-align:center;'>{{ $user->role }}</td>
+                            <td style='text-align:center;'>{{ $user->created_at }}</td>
+                            @if(isset($user->updated_at))
+                            <td style='text-align:center;'>{{ $user->updated_at }}</td>
+                            @else
+                            <td style='text-align:center;'>Aucun modification</td>
+                            @endif
+                            <td style='text-align:center;'>
+
+                              
+                                
+                                <!-- ____________  formulaire supprimer ___________ -->
+
                                 <!-- ____________  button modifier ___________ -->
-                                <a href="{{ url('blocs/' .$bloc->id. '/edit') }}" 
+                                <a href="{{ url('utilisateurs/' .$user->id. '/edit') }}" 
                                    class="btn btn-primary" >
                                     <i class="fa fa-edit"></i> Modifier
                                 </a>
                                 
                                 <!-- ____________  formulaire supprimer ___________ -->
+
                                 {!! Form::open([
                                     'method' => 'DELETE',
-                                    'url' => ['blocs', $bloc->id  ],
+                                    'url' => ['utilisateurs', $user->id  ],
                                     'style' => 'display:inline',
-                                    'id' => $bloc->id,
+                                    'id' => $user->id,
                                 ]) !!}
 
                                     <!-- ____________  button supprimer ___________ -->
                                     <button type="submit" class="btn btn-danger" 
-                                            onclick="app.blocName='{{ $bloc->titre }}';
-                                                     app.del({{ $bloc->id }});
+                                            onclick="app.blocName='{{ $user->id }}';
+                                                     app.del({{ $user->id }});
                                                      return false;">
 
                                         <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
@@ -94,8 +119,8 @@
     </div>
 
     <!-- ____________  modal confirmation supprimer ___________ -->
-    <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
-        <h4>voulez-vous vraiment supprimer le bloc "<strong>@{{ blocName }}</strong>" ?</h4>
+    <modal :show="show" @close="show = false" @confirm="deleteUser" @cancel="cancelDel">
+        <h4>voulez-vous vraiment supprimer ce Employé " ?</h4>
     </modal>
 
     <!-- ____________  chrgement ___________ -->
@@ -198,7 +223,7 @@
                 this.show = true;
                 this.idtodel = id;
             },
-            deleteBloc : function (btn) {
+            deleteUser : function (btn) {
                 $('#'+this.idtodel).submit();
             },
             cancelDel:function (btn) {
@@ -226,7 +251,7 @@
           exportOptions: {
                 columns: [0,1,2,3,4] 
           },
-          title: "liste_blocs"
+          title: "liste_users"
         }, {
           extend: "csv",
           className: "btn btn-info",
@@ -287,6 +312,22 @@
     });
   });
   TableManageButtons.init();
+</script>
+<script type="text/javascript">
+
+$(document).ready(function (){
+    var table = $('#example').DataTable({
+       dom: 'lrtip'
+    });
+    
+    $('#table-filter').on('change', function(){
+       table.search(this.value).draw();   
+    });
+    $('#table-filter-bloc').on('change', function(){
+       table.search(this.value).draw();   
+    });
+});
+
 </script>
 
 @endsection

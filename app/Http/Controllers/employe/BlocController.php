@@ -16,7 +16,7 @@ class BlocController extends Controller
      */
     public function index()
     {
-        $blocs = Bloc::withCount('chamberes')->get();
+        $blocs = Bloc::withCount('chambres')->get();
         return view('employe.blocs.index', ['blocs' => $blocs] );
     }
 

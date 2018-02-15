@@ -239,7 +239,7 @@
           exportOptions: {
                 columns: [0,1,2,3,4] 
           },
-          title: "liste_blocs"
+          title: "liste_chambres"
         }, {
           extend: "csv",
           className: "btn btn-info",

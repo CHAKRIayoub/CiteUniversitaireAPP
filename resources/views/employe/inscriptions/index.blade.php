@@ -33,7 +33,8 @@
 
         <div class="x_content">
             <div class="panel panel-info">
-              <div class="panel panel-heading">Liste Des Etudiants Selectioné genre : Masculin</div>
+              <div class="panel panel-heading">
+                <h4>Liste Des Etudiants Selectioné genre : Masculin</h4></div>
               <div class="panel panel-body" >
             <!-- ____________  table liste des blocs ___________ -->
             <table id="datatable-buttonss" class="table display table-striped table-bordered">
@@ -289,7 +290,7 @@
           exportOptions: {
                 columns: [0,1,2,3,4] 
           },
-          title: "liste_blocs"
+          title: "liste_selectionee_gracons"
         }, {
           extend: "csv",
           className: "btn btn-info",
@@ -341,7 +342,7 @@
           exportOptions: {
                 columns: [0,1,2,3,4] 
           },
-          title: "liste_blocs"
+          title: "liste_selectionee_filles"
         }, {
           extend: "csv",
           className: "btn btn-info",

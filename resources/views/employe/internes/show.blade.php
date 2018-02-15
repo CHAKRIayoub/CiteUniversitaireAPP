@@ -1,4 +1,3 @@
-
 @extends('layouts.template')
 
 @section('content')
@@ -72,13 +71,15 @@
 </div>
 <div class="col-lg-9 col-md-9">
     <ul class="nav nav-tabs">
-         <li class="active"><a data-toggle="tab" href="#PersonnelInfo" class="text-success"><i class="fa fa-indent"></i> Vous</a></li>
+         <li class="active"><a data-toggle="tab" href="#PersonnelInfo" class="text-success"><i class="fa fa-indent"></i> Personnel</a></li>
 
         <li><a data-toggle="tab" href="#BacInfos" class="text-success"><i class="fa fa-graduation-cap"></i> étude</a></li>
 
         <li><a data-toggle="tab" href="#Address" class="text-success"><i class="fa fa-home"></i> Address</a></li>
         
         <li><a data-toggle="tab" href="#Parent" class="text-success"><i class="fa fa-users"></i> Famille </a></li>
+
+         <li><a data-toggle="tab" href="#chambre" class="text-success"><i class="fa fa-users"></i> Chambre </a></li>
     </ul>
 
     <div class="tab-content">
@@ -201,6 +202,27 @@
                         <td>{{ $dossier->nb_enfants }}</td>
                     </tr>
 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+         <div id="chambre" class="tab-pane fade in active">
+            <div class="table-responsive panel">
+                <table class="table">
+                    <tbody>
+                         <tr>
+                            <td class="text-success"><i class="fa fa-"></i>  Chambre Numéro : </td>
+                            <td>{{ $chambre->id }}</td>
+                         </tr>
+                         <tr>
+                            <td class="text-success"><i class="fa fa-"></i> Capacité : </td>
+                            <td>{{ $chambre->capacite }}</td>
+                        </tr>
+                        <tr>
+                             <td class="text-success"><i class="fa fa-"></i> bloc : </td>
+                            <td>{{ $chambre->bloc->titre }} {{ $chambre->bloc->genre }}</td>
+                        </tr>
+                        
                     </tbody>
                 </table>
             </div>

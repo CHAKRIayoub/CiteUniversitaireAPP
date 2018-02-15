@@ -2,6 +2,19 @@
 
 @section('content')
 
+<style type="text/css">
+    
+    .col-md-4 a{
+        padding: 30px;
+        font-size: 20px;
+    }
+    .col-md-4 a:hover{
+        transition: 2s all ease ;
+        background-color: #9cccf5;
+        font-size: 25px;
+    }
+
+</style>
 
 <!-- __________________________HTML_____________________________________________ -->
 
@@ -11,7 +24,7 @@
     <!-- ____________________ content Titre ________________________ -->    
     <div class="page-title">
         <div class="title_left">
-            <h3>Dossier</h3> <br>
+            <h3>Menu</h3> <br>
         </div>
     </div><br><br>
       @if ($message = Session::get('success'))
@@ -28,9 +41,55 @@
     <br>
 
     <div class="row">
-        <h1> Bonjour Cher Administrateur </h1>
-        <hr>
+       
+        <div class="row" >
+        
+        <div class="col-md-4" >
+            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/blocs" >
+                <i class="fa fa-building"></i> gestion des Blocs
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/chambres" >
+                <i class="fa fa-home"></i> gestion des chambres 
+            </a>
+        </div>
+
+        <div class="col-md-4">
+         <a class="btn btn-primary btn-lg btn-block btn-huge" href="/inscriptions" > 
+            <i class="fa fa-file"></i> gestion des dossiers 
+         </a>
+        </div>
+
     </div>
+
+
+    <div class="row" >
+    
+        <div class="col-md-4" >
+            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/regles" >
+                <i class="fa fa-balance-scale"></i> gestion des régles
+            </a>        
+        </div>
+
+        <div class="col-md-4">
+            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/app" >
+                <i class="fa fa-cogs"></i> gestion d'application
+            </a>
+        </div>
+
+        <div class="col-md-4">
+          <a class="btn btn-primary btn-lg btn-block btn-huge" href="/utilisateurs" >
+                <i class="fa fa-users"></i> gestion des utilisateurs
+          </a>
+        </div>
+
+    </div>
+
+
+
+</div>
 
 
 

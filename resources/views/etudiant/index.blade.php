@@ -2,6 +2,19 @@
 
 @section('content')
 
+<style type="text/css">
+    
+    .col-md-6 a{
+        padding: 50px;
+        font-size: 24px;
+    }
+    .col-md-6 a:hover{
+        transition: 2s all ease ;
+        background-color: #9cccf5;
+        font-size: 25px;
+    }
+
+</style>
 
 <!-- __________________________HTML_____________________________________________ -->
 
@@ -11,7 +24,7 @@
     <!-- ____________________ content Titre ________________________ -->    
     <div class="page-title">
         <div class="title_left">
-            <h3>Dossier</h3> <br>
+            <h3>Menu</h3> <br>
         </div>
     </div><br><br>
       @if ($message = Session::get('success'))
@@ -28,9 +41,28 @@
     <br>
 
     <div class="row">
-        <h1> Bonjour Cher Etudiant </h1>
-        <hr>
+       
+        <div class="row" >
+        
+        <div class="col-md-6" >
+            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/dossier" >
+                <i class="fa fa-file"></i> Mon Dossier
+            </a>
+        </div>
+
+        <div class="col-md-6" >
+            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/resultat" >
+                <i class="fa fa-bell"></i> Resultat
+            </a>
+        </div>
+
     </div>
+
+
+
+
+
+</div>
 
 
 

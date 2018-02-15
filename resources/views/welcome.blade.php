@@ -47,6 +47,7 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                color: #fff;
                 
             }
 
@@ -95,10 +96,12 @@
             .my-btn{
                 border: 1px solid #fff;
                 padding: 10px 30px;
+                background-color: #0871f3;
+                border-radius: 3%;
                 transition: all 2s;
             }
             .my-btn:hover{
-                background-color: rgba(255, 255, 255, 0.3);
+                background-color: rgba(255, 255, 255, 0.8);
                 color: #fff;
                 transition: all 1s;
             }
@@ -127,9 +130,12 @@
                 </div>
 
                 <div class="links">
+                    @auth
 
-                    <H1><strong>Faire une demande de logemen</strong> </H1><br><br>
-                    <a  href="/login#toregister"   class="my-btn" href="">Inscription</a>
+                    @else
+                        <H1><strong>Faire une demande de logemen</strong> </H1><br><br>
+                        <a style="color: #fff;"  href="/login#toregister"   class="my-btn" href="">Inscription</a>
+                    @endauth
                 </div>
               
             </div>

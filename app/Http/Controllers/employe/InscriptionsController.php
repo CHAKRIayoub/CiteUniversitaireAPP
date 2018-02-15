@@ -25,6 +25,7 @@ class InscriptionsController extends Controller
             }
         }
 
+        
         foreach ($chambres as $key => $chambre) {
             
                 $hbrgms = Hebergement::where('chambre_id', '=', $chambre->id)->get();
@@ -39,7 +40,8 @@ class InscriptionsController extends Controller
                 }
         }
 
-
+        Session::flash('success', 'Réservation effectué avec succées ');
+        return redirect('/inscriptions');
 
 
      
@@ -56,7 +58,7 @@ class InscriptionsController extends Controller
         
         if ( ($datec >= $dated) && ($datef >= $datec ) ){
 
-            dd('inscription en cours');
+            return view('employe.inscriptions.dateinv');
 
         }else{
 
