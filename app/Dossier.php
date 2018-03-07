@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dossier extends Model
 {
-	public static function list_accpt($genre){
+    public static function list_accpt($genre){
 
         $blocs = Bloc::where('genre', '=', $genre)->get();
         $somme = 0;
@@ -83,7 +83,7 @@ class Dossier extends Model
 
         return $selected_dossiers;
 
-	}
+    }
 
     public static function list_accpt_boy(){
 
@@ -91,7 +91,7 @@ class Dossier extends Model
 
     }
 
-	public function user()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
@@ -111,10 +111,10 @@ class Dossier extends Model
         $note += 1 * Regle::where('nom', 'nb_enfants')->first()->factor / $this->nb_enfants ;
        
         if($this->maladie == "oui") 
-        	$note += Regle::where('nom', 'maladie')->first()->factor;
+            $note += Regle::where('nom', 'maladie')->first()->factor;
        
         if($this->handicape == "oui") 
-        	$note += Regle::where('nom', 'handicape')->first()->factor;
+            $note += Regle::where('nom', 'handicape')->first()->factor;
        
         $mentionfact = Regle::where('nom', 'mention')->first()->factor;
         if ($this->mention == "passable" ) $note += 1 * $mentionfact;
@@ -130,31 +130,31 @@ class Dossier extends Model
 
 
 
-	protected $fillable = [
-			'user_id',
-			'cne',
-			'cin',
-			'lieu_naissance',
-			'date_naissance',
-			'genre',
-			'nom',
-			'prenom',
-			'adresse',
-			'ville_id',
-			'telephone',
-			'annee_bac',
-			'mention',
-			'cycle',
-			'etablissement',
-			'handicape',
-			'maladie',
-			'nom_pere',
-			'cin_pere',
-			'nom_mere',
-			'cin_mere',
-			'revenue',
-			'nb_enfants',
-			'note_dossier'
+    protected $fillable = [
+            'user_id',
+            'cne',
+            'cin',
+            'lieu_naissance',
+            'date_naissance',
+            'genre',
+            'nom',
+            'prenom',
+            'adresse',
+            'ville_id',
+            'telephone',
+            'annee_bac',
+            'mention',
+            'cycle',
+            'etablissement',
+            'handicape',
+            'maladie',
+            'nom_pere',
+            'cin_pere',
+            'nom_mere',
+            'cin_mere',
+            'revenue',
+            'nb_enfants',
+            'note_dossier'
     ];
 
 

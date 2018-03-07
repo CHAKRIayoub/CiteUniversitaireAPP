@@ -178,6 +178,15 @@
             </div><br><br>
 
 
+             <div class="panel panel-primary">
+                <div class="panel-heading"><h3 class="name ">Dossier Format PDF</h3></div>  
+               
+               <embed src="papers/{{ Auth::user()->id }}.pdf" width="100%" height="1000px" />
+ 
+            </ul>
+            </div><br><br>
+
+
 
 
 

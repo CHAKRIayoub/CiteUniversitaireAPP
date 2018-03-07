@@ -77,6 +77,10 @@ class DossierController extends Controller
         ]);
         $dossier->CalculNote();
         $dossier->save();
+
+        $imageName = Auth::user()->id.'.'.request()->papers->getClientOriginalExtension();
+        request()->papers->move(public_path('papers'), $imageName);
+
         Session::flash('success', 'vous avez terminez votre inscription avec succées');
         return redirect('/dossier');
     }

@@ -42,7 +42,15 @@
         <!-- ____________  fomr div ___________ -->
         <div class="col-md-10 col-md-offset-1 ">
             <!-- ____________  form ___________ -->
-            <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('dossier.store') }}">{{ csrf_field() }}
+            <form onsubmit="
+
+                if( $('input[type=file]').val() != '' ) return true; 
+                else {
+                    alert('Uploader le fichier pdf !!!');
+                    return false; 
+                }" 
+
+            id="form" class="form-horizontal form-label-left" enctype="multipart/form-data" method="POST" action="{{ route('dossier.store') }}">{{ csrf_field() }}
 
                 <!-- ____________  chrgement ___________ -->
                 <transition name="modal" v-if="chargement" >
@@ -723,6 +731,42 @@
 
 
 
+                <div class="panel panel-success">    
+                    <div class="panel-heading">
+                        <h2>Papiers Format PDF :</h2>
+                    </div>
+                    <div class="panel-body" ><br>
+                        <p> Scaner dans le meme fichier PDF les papier suivants : <br>
+                            - CIN<br>
+                            - Bacalaureat<br>
+                            - Attestation de revenu des parents<br>
+                            - ...
+                        </p>
+
+
+                        <!--______________ pdf champ _______________-->
+
+                        <!-- pdf label -->
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lieu_naisse">
+                            Uploader le fichier pdf : <span class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <!-- _____________ universite Input _______________ -->
+                            <input accept="application/pdf" name="papers" type="file" class="form-control" >
+                             
+                          
+                        </div><br><br><br><br>
+
+                    </div>
+                </div>
+
+
+
+                
+
+
+
+
 
 
 
@@ -798,13 +842,16 @@
 				impots:'',
 				nb_enfants:'',
 				note_dossier:'',
+                papers:'',
                 chargement: true
             }
         },
         methods: {
             submitForm() {
+               
+
                 this.$validator.validateAll().then(res=>{
-                    if(res) {
+                    if(res ) {
                         return true;
                     } else {
                         alert('veuillez remplire les champs nécessaire');

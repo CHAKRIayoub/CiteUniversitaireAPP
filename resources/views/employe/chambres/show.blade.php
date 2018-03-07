@@ -53,7 +53,7 @@
                         </div>
                         <div class="count">{{ $chambre->capacite  }}</div>
                         <br>
-                        <h3>Capacité du chambre</h3>
+                        <h3>Capacité</h3>
                         <br>
                                               </div>
                     </div>

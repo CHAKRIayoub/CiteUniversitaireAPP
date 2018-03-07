@@ -48,11 +48,9 @@ class EtudiantController extends Controller
                     }
                 }
                 if ($exist) {
-                    $res = 'félicitation vous étes sélectioné parmi les résident, nous vous invitons à payé les droits de Logement';
+                    $res = 'félicitation vous étes sélectioné parmi les résident, nous vous invitons à payé les droits de Logement ';
 
-                    return view('etudiant.resultat',['res'=>$res  ]
-
-                    );
+                    return view('etudiant.resultat',['res'=>$res  ] );
                     
                 }else{
                     
