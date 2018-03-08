@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Bloc;
 use Session;
+use App\Chambre;
 
 class BlocController extends Controller
 {
@@ -42,13 +43,24 @@ class BlocController extends Controller
         $this->validate($request, [
             'titre' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
+            'cpch' => 'required|integer',
+            'nbch' => 'required|integer',
         ]);
-        
+
         $bloc = new Bloc();
         $bloc->titre = $request->titre;
         $bloc->genre = $request->genre;
 
         $bloc->save();
+
+        for ($i=0; $i < $request->nbch ; $i++) { 
+             $chambre = new Chambre();
+             $chambre->capacite = $request->cpch;
+             $chambre->bloc_id = $bloc->id;
+             $chambre->save();
+        }
+        
+       
 
         Session::flash('success', 'Bloc " ' .$bloc->titre. ' " Ajoutée avec succées ');
 

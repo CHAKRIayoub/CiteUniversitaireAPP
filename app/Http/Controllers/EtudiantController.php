@@ -11,6 +11,7 @@ use App\Chambre;
 use App\Dossier;
 use Session;
 use App\Application;
+use PDF;
 
 
 class EtudiantController extends Controller
@@ -80,5 +81,32 @@ class EtudiantController extends Controller
         
         }
     	
+    }
+
+
+    public function recu_admission(){
+
+        $this->middleware('ChekRole:etudiant');
+        $pdf = PDF::loadView('etudiant.admission');
+        return $pdf->download('attestation_admission' . Auth::user()->id . '.pdf');
+
+    }
+
+    public function recu_inscription()
+    {
+        
+        $this->middleware('ChekRole:etudiant');
+        $pdf = PDF::loadView('etudiant.dossier.recu');
+        return $pdf->download('recu_inscription' . Auth::user()->id . '.pdf');
+
+    }
+
+     public function recu_residence()
+    {
+        
+        $this->middleware('ChekRole:etudiant');
+        $pdf = PDF::loadView('etudiant.residence');
+        return $pdf->download('attestation_residence' . Auth::user()->id . '.pdf');
+
     }
 }

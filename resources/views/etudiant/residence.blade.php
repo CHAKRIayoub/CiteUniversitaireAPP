@@ -16,12 +16,13 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
   <br><br><br>
 
-  <center><div><span><h2>Attestation d'inscription</h2></span></div></center>
+  <center><div><span><h2>Attestation de Résidence</h2></span></div></center>
   
 <br><br>
 
+l'Administration de la cité universitaire atteste que l'etudiant {{ Auth::user()->dossier->nom }} {{ Auth::user()->dossier->prenom }} est un résident de la cité. 
 
-<table class="primary" width="100%" >
+<table class="success" width="100%" >
     <thead>
         <tr>
             <th colspan="2" ><h3>Information Personnel :<h3> </th>
@@ -79,53 +80,10 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
 
 <br><br>
-<table class="primary" width="100%" >
+<table class="success" width="100%" >
     <thead>
         <tr>
-            <th colspan="2" ><h3>Localisation <h3> </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>Adresse</td>
-            <td><b>{{ Auth::user()->dossier->adresse }}</b></td>
-        </tr>
-
-        <tr>
-            <td>Ville</td>
-            <td><b>{{ Auth::user()->dossier->ville->ville }}</b></td>
-        </tr>
-    </tbody>
-</table> 
-
-
-
-<br><br>
-<table class="primary" width="100%" >
-    <thead>
-        <tr>
-            <th colspan="2" ><h3>Etude en Bac<h3> </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>Année d'obtention du Bac :</td>
-            <td><b>{{ Auth::user()->dossier->annee_bac }}</b></td>
-        </tr>
-        <tr>
-            <td>Mention</td>
-            <td><b>{{ Auth::user()->dossier->mention }}</b></td>
-        </tr>
-    </tbody>
-</table>
-
-<br><br>
-<table class="primary" width="100%" >
-    <thead>
-        <tr>
-            <th colspan="2" ><h3> Inscription Universitaire<h3> </th>
+            <th colspan="2" ><h3>Inscription Universitaire<h3> </th>
         </tr>
     </thead>
 
@@ -142,37 +100,17 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 </table>
 
 <br><br>
-<table class="primary" width="100%" >
+<table class="success" width="100%" >
     <thead>
         <tr>
-            <th colspan="2" ><h3>Information des parents<h3> </th>
+            <th colspan="2" ><h3>Chambre et Bloc<h3> </th>
         </tr>
     </thead>
 
     <tbody>
         <tr>
-            <td>Nom du Père</td>
-            <td><b>{{ Auth::user()->dossier->nom_pere }}</b></td>
-        </tr>
-        <tr>
-            <td> CIN du Père</td>
-            <td><b>{{ Auth::user()->dossier->cin_pere }}</b></td>
-        </tr>
-        <tr>
-            <td> Nom du Mère</td>
-            <td><b>{{ Auth::user()->dossier->nom_mere }}</b></td>
-        </tr>
-        <tr>
-            <td>CIN du Mère </td>
-            <td><b>{{ Auth::user()->dossier->cin_mere }}</b></td>
-        </tr>
-        <tr>
-            <td>Revenue des parents</td>
-            <td><b>{{ Auth::user()->dossier->revenue }}</b></td>
-        </tr>
-        <tr>
-            <td>Nombres Des Enfants</td>
-            <td><b>{{ Auth::user()->dossier->nb_enfants }}</b></td>
+            <td></td>
+            <td><b></b></td>
         </tr>
     </tbody>
 </table>

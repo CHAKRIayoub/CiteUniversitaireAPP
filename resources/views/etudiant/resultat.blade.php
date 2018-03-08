@@ -41,16 +41,25 @@
     <div class="row">
        
         @isset($res)
+
+           
             
             <div class="alert alert-success alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h3>{{ $res }}</h3> 
+                <h3>{{ $res }}<br><br></h3> 
             </div>
+
+             <a href="{{ url('/attestation/admission') }}" style="float: right" class="btn btn-success">
+                <i class="fa fa-download"></i> Aattestation d'admission
+            </a>
         @else
 
             @isset($chambre)
+
+
+            
 
             <div class="col-md-8 col-md-offset-2" >
                 <div class="panel panel-info">
@@ -93,6 +102,10 @@
                         
                     </div>
                 </div>
+
+            <a href="{{ url('/attestation/residence') }}" style="float: right" class="btn btn-success">  
+                <i class="fa fa-download"> </i>   Attestation de Résidence
+            </a>
 
             @endisset
 

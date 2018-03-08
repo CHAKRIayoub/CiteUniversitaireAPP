@@ -5,7 +5,7 @@
 <style type="text/css">
     
     .col-md-6 a{
-        padding: 50px;
+        padding: 50px 50px 50px 50px;
         font-size: 24px;
     }
     .col-md-6 a:hover{
@@ -13,6 +13,14 @@
         background-color: #9cccf5;
         font-size: 25px;
     }
+    .btn-sq-lg {
+      width: 250px !important;
+      height: 250px !important;
+      padding: 60px;
+      font-size: 17px;
+      margin-top: 90px;
+    }
+
 
 </style>
 
@@ -41,28 +49,21 @@
     <br>
 
     <div class="row">
-       
-        <div class="row" >
-        
-        <div class="col-md-6" >
-            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/dossier" >
-                <i class="fa fa-file"></i> Mon Dossier
+        <div class="col-md-8 col-md-offset-2">
+          <p>
+            <center>
+            <a href="/dossier" class="btn btn-sq-lg btn-primary">
+                <i class="fa fa-file fa-5x"></i><br/><br>
+                <b>Dossier</b> <br> imprimer, modifier...
             </a>
-        </div>
-
-        <div class="col-md-6" >
-            <a class="btn btn-primary btn-lg btn-block btn-huge" href="/resultat" >
-                <i class="fa fa-bell"></i> Resultat
+            <a href="/resultat" class="btn btn-sq-lg btn-success">
+              <i class="fa fa-bell fa-5x"></i><br/><br>
+              <b>Resultat</b> <br> afficher, imprimer...
             </a>
+            </center>
+          </p>
         </div>
-
     </div>
-
-
-
-
-
-</div>
 
 
 

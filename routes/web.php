@@ -55,7 +55,9 @@ Route::middleware(['auth','ChekRole:etudiant'])->group(function () {
     
 	Route::get('/etudiant', 'EtudiantController@index' );
 	Route::resource('/dossier','etudiant\\DossierController',['except' => ['destroy','show','create']]);
-	Route::get("/recu","HomeController@downloadrRECU");
+	Route::get("/recu","EtudiantController@recu_inscription");
+	Route::get("/attestation/admission","EtudiantController@recu_admission");
+	Route::get("/attestation/residence","EtudiantController@recu_residence");
 	Route::get("/resultat","EtudiantController@resultat");
 	Route::resource("/changement","etudiant\\ChangementController@resultat");
 	

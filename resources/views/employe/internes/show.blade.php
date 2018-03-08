@@ -80,6 +80,8 @@
         <li><a data-toggle="tab" href="#Parent" class="text-success"><i class="fa fa-users"></i> Famille </a></li>
 
          <li><a data-toggle="tab" href="#chambre" class="text-success"><i class="fa fa-users"></i> Chambre </a></li>
+
+          <li><a data-toggle="tab" href="#papers" class="text-success"><i class="fa fa-file"></i> Dossier PDF </a></li>
     </ul>
 
     <div class="tab-content">
@@ -225,6 +227,14 @@
                         
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+         <div id="papers" class="tab-pane fade">
+            <div class="table-responsive panel">
+
+                 <embed src="/papers/{{ $dossier->user->id }}.pdf" width="100%" height="1000px" />
+
             </div>
         </div>
 

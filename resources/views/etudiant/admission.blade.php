@@ -16,12 +16,13 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
   <br><br><br>
 
-  <center><div><span><h2>Attestation d'inscription</h2></span></div></center>
+  <center><div><span><h2>Attestation d' Admission</h2></span></div></center>
   
 <br><br>
 
+<p> l'Etudiant avec les information en bas est admis pour résider dans le cité  </p>
 
-<table class="primary" width="100%" >
+<table class="warning" width="100%" >
     <thead>
         <tr>
             <th colspan="2" ><h3>Information Personnel :<h3> </th>
@@ -79,7 +80,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
 
 <br><br>
-<table class="primary" width="100%" >
+<table class="warning" width="100%" >
     <thead>
         <tr>
             <th colspan="2" ><h3>Localisation <h3> </th>
@@ -102,7 +103,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
 
 <br><br>
-<table class="primary" width="100%" >
+<table class="warning" width="100%" >
     <thead>
         <tr>
             <th colspan="2" ><h3>Etude en Bac<h3> </th>
@@ -122,7 +123,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 </table>
 
 <br><br>
-<table class="primary" width="100%" >
+<table class="warning" width="100%" >
     <thead>
         <tr>
             <th colspan="2" ><h3> Inscription Universitaire<h3> </th>
@@ -142,7 +143,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 </table>
 
 <br><br>
-<table class="primary" width="100%" >
+<table class="warning" width="100%" >
     <thead>
         <tr>
             <th colspan="2" ><h3>Information des parents<h3> </th>
