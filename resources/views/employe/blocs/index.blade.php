@@ -1,135 +1,124 @@
 @extends('layouts.template')
-
 @section('content')
-
-<!-- __________________________________ HTML _____________________________________________ -->
-
+<!-- _______________ HTML ______________________ -->
 <!-- ____________________ content ________________________ -->
 <div class="right_col" role="main" id="app"> 
-  
-    <!-- ____________ content titre ___________ -->
-    <div class="page-title">
-        <div class="title_left">
-            <h3>Gestion des Blocs</h3> 
-        </div>
+  <!-- ____________ content titre ___________ -->
+  <div class="page-title">
+    <div style="float: left; font-size: medium;">
+      <ol class="breadcrumb" style="background-color: #eee">         
+        <li><a href="/home">
+          <i class="fa fa-home"></i> Acceuil
+        </a></li>
+        <li class="active">
+          <i class="fa fa-building"></i> Gestion des Blocs
+        </li>  
+      </ol>
     </div>
-
-    <!-- ____________ Button Ajouter bloc ___________ -->
-    <a href="{{ route('blocs.create') }}" style="float: right" class="btn btn-success" >
-        <i class="fa fa-plus"> </i>  Ajouter Un Bloc
-    </a>
-
-    <div class="clearfix"></div>        
-
-    <!-- ____________ content body ___________ -->
-    <div class="row">
-
-        <!-- ____________  alert ___________ -->
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-            <strong>{{ $message }}</strong> 
+    <div style="float: right; font-size: medium;">
+        <a style="float: right;" href="{{ route('blocs.create') }}" class="btn btn-success" >
+          <i class="fa fa-plus"> </i> </i> Ajouter Un Bloc
+        </a>
+    </div> 
+  </div>
+  <div class="clearfix"></div>        
+  <!-- ____________ content body ___________ -->
+  <div class="row">
+    <!-- ____________  alert ___________ -->
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <strong>{{ $message }}</strong> 
+    </div>
+    @endif
+    <div class="x_content">
+      <div class="x_panel">
+        <div class="x_title">
+          <div class="h3"><i class="fa fa-building-o"></i> Liste Des Blocs </div>   
+          <div class="clearfix"></div>
         </div>
-        @endif
-
         <div class="x_content">
-            <p class="text-muted font-13 m-b-30">liste des blocs</p>
-
+          <div class="col-md-4 col-md-offset-8 " >
+            <input class="form-control" style="font-size: 18px" placeholder="Chercher"  type="text" id="mysearch"><br>
+          </div>
             <!-- ____________  table liste des blocs ___________ -->
-            <table id="datatable-buttons" class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Titre</th>
-                        <th>Nombres_des_chambres</th>
-                        <th>Genre</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($blocs as $bloc)
-                        <tr>
-                            <td>{{ $bloc->id }}</td>
-                            <td>{{ $bloc->titre }}</td>
-                            <td>{{ $bloc->chamberes_count }}</td>
-                            <td>{{ $bloc->genre }}</td>
-                            <td>{{ $bloc->created_at }}</td>
-                            <td>
-                                <!-- ____________  button modifier ___________ -->
-                                <a href="{{ url('blocs/' .$bloc->id. '/edit') }}" 
-                                   class="btn btn-primary" >
-                                    <i class="fa fa-edit"></i> Modifier
-                                </a>
-                                
-                                <!-- ____________  formulaire supprimer ___________ -->
-                                {!! Form::open([
-                                    'method' => 'DELETE',
-                                    'url' => ['blocs', $bloc->id  ],
-                                    'style' => 'display:inline',
-                                    'id' => $bloc->id,
-                                ]) !!}
+          <table id="datatable-buttons" class="table table-striped table-hover">
+              <thead>
+                  <tr>
+                      <th>#ID <i class="fa fa-sort"></i></th>
+                      <th>Titre <i class="fa fa-sort"></i></th>
+                      <th>Genre <i class="fa fa-sort"></i></th>
+                      <th>Date <i class="fa fa-sort"></i></th>
+                      <th>Nombres des chambres <i class="fa fa-sort"></i></th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach ($blocs as $bloc)
+                      <tr>
+                          <td>{{ $bloc->id }}</td>
+                          <td>{{ $bloc->titre }}</td>
+                          <td>{{ $bloc->genre }}</td>
+                          <td>{{ $bloc->created_at }}</td>
+                          <td>{{ $bloc->chambres_count }}</td>
+                          <td>
+                              <!-- ____________  button modifier ___________ -->
+                              <a  data-toggle="tooltip" 
+                                  data-placement="bottom" 
+                                  data-original-title="modifier"
+                                  href="{{ url('blocs/' .$bloc->id. '/edit') }}" 
+                                  >
+                                  <i class="fa fa-edit fa-lg"></i>
+                              </a>&nbsp;&nbsp;
+                              
+                              <!-- ____________  formulaire supprimer ___________ -->
+                              {!! Form::open([
+                                  'method' => 'DELETE',
+                                  'url' => ['blocs', $bloc->id  ],
+                                  'style' => 'display:inline',
+                                  'id' => $bloc->id,
+                              ]) !!}
 
-                                    <!-- ____________  button supprimer ___________ -->
-                                    <button type="submit" class="btn btn-danger" 
-                                            onclick="app.blocName='{{ $bloc->titre }}';
-                                                     app.del({{ $bloc->id }});
-                                                     return false;">
+                                  <!-- ____________  button supprimer ___________ -->
+                                  <a  data-toggle="tooltip" 
+                                      data-placement="bottom" 
+                                      data-original-title="supprimer"
+                                      onclick="app.blocName='{{ $bloc->titre }}';
+                                              app.del({{ $bloc->id }});
+                                                   return false;">
 
-                                        <i class="fa fa-trash-o" aria-hidden="true"></i> Supprimer
-                                    
-                                    </button>
-                                   
-                                {!! Form::close() !!}
-                            </td>      
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
+                                      <i style="color:tomato;" class="fa fa-trash-o fa-lg" ></i> 
+                                  
+                                  </a>
+                                 
+                              {!! Form::close() !!}
+                          </td>      
+                      </tr>
+                  @endforeach
+              </tbody>
+          </table>
         </div>
-
+      </div>        
     </div>
-
-    <!-- ____________  modal confirmation supprimer ___________ -->
-    <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
-        <h4>voulez-vous vraiment supprimer le bloc "<strong>@{{ blocName }}</strong>" ?</h4>
-    </modal>
-
-    <!-- ____________  chrgement ___________ -->
-    <transition name="modal" v-if="chargement" >
-        <div class="loading-mask">
-            <div class="loader"></div>      
-        </div>
-    </transition>
-
+  </div>
+  <!-- ____________  modal confirmation supprimer ___________ -->
+  <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
+    <h4>voulez-vous vraiment supprimer le bloc "<strong>@{{ blocName }}</strong>" ?</h4>
+  </modal>
+  <!-- ____________  chrgement ___________ -->
+  <transition name="modal" v-if="chargement" >
+      <div class="loading-mask">
+          <div class="loader"></div>      
+      </div>
+  </transition>
 </div>
-
-<!-- __________________________________JS_____________________________________________ -->
-
+<!-- ________________JS___________________________ -->
 <!-- ____________  required files  ___________ -->
-
-<script src="{{ asset("js/datatables/jquery.dataTables.min.js")}}"></script>
-<script src="{{ asset("js/datatables/dataTables.bootstrap.js")}}"></script>
-<script src="{{ asset("js/datatables/dataTables.buttons.min.js")}}"></script>
-<script src="{{ asset("js/datatables/buttons.bootstrap.min.js")}}"></script>
-<script src="{{ asset("js/datatables/jszip.min.js")}}"></script>
-<script src="{{ asset("js/datatables/pdfmake.min.js")}}"></script>
-<script src="{{ asset("js/datatables/vfs_fonts.js")}}"></script>
-<script src="{{ asset("js/datatables/buttons.html5.min.js")}}"></script>
-<script src="{{ asset("js/datatables/buttons.print.min.js")}}"></script>
-<script src="{{ asset("js/datatables/dataTables.fixedHeader.min.js")}}"></script>
-<script src="{{ asset("js/datatables/dataTables.keyTable.min.js")}}"></script>
-<script src="{{ asset("js/datatables/dataTables.responsive.min.js")}}"></script>
-<script src="{{ asset("js/datatables/responsive.bootstrap.min.js")}}"></script>
-<script src="{{ asset("js/datatables/dataTables.scroller.min.js")}}"></script>
+<script src="{{asset("js/datatables/jquery.dataTables.min.js")}}"></script>
 <script src="{{ asset("js/vue.js")}}"></script>
-<script src="{{ asset("js/axios.js")}}"></script>
-
 <!-- ____________  template modal confirmez suppresion  ___________ -->
-
 <script type="text/x-template" id="modal-template">
     <transition name="modal">
         <div class="modal-mask" @click="closeM()" v-show="show">
@@ -144,7 +133,6 @@
                     <button style="float: right;" class="btn btn-danger" @click="sendConfirm" >
                         <i class="fa fa-trash-o" aria-hidden="true"></i> supprimer
                     </button>
-
                     <!-- ____________  button annuler  ___________ -->
                     <button class="btn btn-success" @click="sendCancel" >
                       <i class="fa fa-arrow-left"></i> annler
@@ -155,7 +143,6 @@
         </div>
     </transition>
 </script>
-
 <!-- ____________  Vue Script (loading..., delete modal)  ___________ -->
 <script>
     //____________  modal component  ___________ -->
@@ -181,7 +168,6 @@
             });
         }
     });
-
     //____________  Vue instance  ___________ -->
     var app = new Vue({
         el: '#app',
@@ -209,84 +195,67 @@
         mounted: function () {  
             this.chargement = false;
             $('.row').addClass('animated fadeInUp');
-
         }
     });
 </script>
-
 <!-- //____________  data table and buttons  ___________ -->
 <script>
-  var handleDataTableButtons = function() {
-      "use strict";
-      0 !== $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
-        dom: "Bfrtip",
-        buttons: [{
-          extend: "copy",
-          className: "btn btn-info",
-          exportOptions: {
-                columns: [0,1,2,3,4] 
-          },
-          title: "liste_blocs"
-        }, {
-          extend: "csv",
-          className: "btn btn-info",
-          exportOptions: {
-                columns: [0,1,2,3,4] 
-          },
-          title: "liste_blocs"
-        }, {
-          extend: "excel",
-          className: "btn btn-info",
-          exportOptions: {
-                columns: [0,1,2,3,4] 
-          },
-          title: "liste_blocs"
-        }, {
-          extend: "pdf",
-          className: "btn btn-info",
-          exportOptions: {
-                columns: [0,1,2,3,4] 
-          },
-          title: "liste_blocs"
-        }, {
-          extend: "print",
-          className: "btn btn-info",
-          exportOptions: {
-                columns: [0,1,2,3,4] 
-          },
-          title: "liste_blocs"
-        }],
-        responsive: !0
-      })
-    },
-    TableManageButtons = function() {
-      "use strict";
-      return {
-        init: function() {
-          handleDataTableButtons()
-        }
-      }
-    }();
+  var table = $('#datatable-buttons').DataTable({
+    "dom": "tp",
+  });
+  $('#mysearch').keyup(function() {
+    table.search($(this).val()).draw();
+  })
+  // var handleDataTableButtons = function() {
+  //     "use strict";
+  //     0 !== $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+  //       dom: "t",
+  //       buttons: [{
+  //         extend: "excel",
+  //         text:'<i class="fa fa-file-excel-o"></i> pdf',
+  //         className: "btn btn-success btn-lg",
+  //         exportOptions: {
+  //               columns: [0,1,2,3,4] 
+  //         },
+  //         title: "liste_blocs"
+  //       }, {
+  //         extend: "pdf",
+  //         text:      '<i class="fa fa-file-pdf-o"></i> Excel',
+  //         className: "btn btn-danger btn-lg",
+  //         exportOptions: {
+  //               columns: [0,1,2,3,4] 
+  //         },
+  //         title: "liste_blocs"
+  //       }],
+  //       responsive: !0
+  //     })
+  //   },
+  //   TableManageButtons = function() {
+  //     "use strict";
+  //     return {
+  //       init: function() {
+  //         handleDataTableButtons()
+  //       }
+  //     }
+  //   }();
 </script>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('#datatable').dataTable();
-    $('#datatable-keytable').DataTable({
-      keys: true
-    });
-    $('#datatable-responsive').DataTable();
-    $('#datatable-scroller').DataTable({
-      ajax: "js/datatables/json/scroller-demo.json",
-      deferRender: true,
-      scrollY: 380,
-      scrollCollapse: true,
-      scroller: true
-    });
-    var table = $('#datatable-fixed-header').DataTable({
-      fixedHeader: true
-    });
-  });
-  TableManageButtons.init();
+  // $(document).ready(function() {
+  //   $('#datatable-keytable').DataTable({
+  //     keys: true
+  //   });
+  //    $('#datatable-responsive').DataTable();
+  //   $('#datatable-scroller').DataTable({
+  //     ajax: "js/datatables/json/scroller-demo.json",
+  //     deferRender: true,
+  //     scrollY: 380,
+  //     scrollCollapse: true,
+  //     scroller: true
+  //   });
+  //   var table = $('#datatable-fixed-header').DataTable({
+  //     fixedHeader: true
+  //   });
+  // });
+  // TableManageButtons.init();
 </script>
-
 @endsection

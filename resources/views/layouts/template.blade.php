@@ -22,7 +22,12 @@
 
 
 <style>  
-.loading-mask,.modal-mask{position:fixed;z-index:9998;top:57px;left: 240px;;width:100%;height:100%;transition:opacity .3s ease}*{box-sizing:border-box}.modal-mask{background-color:rgba(0,0,0,.5)}.loading-mask{background-color:#f7f7f7}.modal-container{width:350px;margin:40px auto 0;padding:20px 30px;background-color:#fff;border-radius:2px;box-shadow:0 2px 8px rgba(0,0,0,.33);transition:all .3s ease;font-family:Helvetica,Arial,sans-serif}.modal-header h3{margin-top:0;color:#42b983}.modal-body{margin:20px 0}.text-right{text-align:right}.form-label{display:block;margin-bottom:1em}.form-label>.form-control{margin-top:.5em}.form-control{display:block;width:100%;padding:.5em 1em;line-height:1.5;border:1px solid #ddd}.modal-enter,.modal-leave-active{opacity:0}.modal-enter .modal-container,.modal-leave-active .modal-container{-webkit-transform:scale(1.1);transform:scale(1.1)}.loader{position:absolute;left:40%;top:40%;z-index:1;margin:-75px 0 0 -75px;border:16px solid #fff;border-radius:50%;border-top:16px solid #3498db;width:120px;height:120px;-webkit-animation:spin .6s linear infinite;animation:spin .6s linear infinite}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}} body{ font-family:calibri light;}
+.loading-mask,.modal-mask{position:fixed;z-index:9998;top:57px;left: 230px;;width:100%;height:100%;transition:opacity .3s ease}*{box-sizing:border-box}.modal-mask{background-color:rgba(0,0,0,.5)}.loading-mask{background-color:#f7f7f7}.modal-container{width:350px;margin:150px 40% 60% 27%;padding:20px 30px;background-color:#fff;border-radius:2px;box-shadow:0 2px 8px rgba(0,0,0,.33);transition:all .3s ease}.modal-header h3{margin-top:0;color:#42b983}.modal-body{margin:20px 0}.text-right{text-align:right}.form-label{display:block;margin-bottom:1em}.form-label>.form-control{margin-top:.5em}.form-control{display:block;width:100%;padding:.5em 1em;line-height:1.5;border:1px solid #ddd}.modal-enter,.modal-leave-active{opacity:0}.modal-enter .modal-container,.modal-leave-active .modal-container{-webkit-transform:scale(1.1);transform:scale(1.1)}.loader{position:absolute;left:40%;top:40%;z-index:1;margin:-75px 0 0 -75px;border:16px solid #fff;border-radius:50%;border-top:16px solid #3498db;width:120px;height:120px;-webkit-animation:spin .6s linear infinite;animation:spin .6s linear infinite}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}} body{ font-family:calibri light;}tr td a{font-size:16px;}tr th{cursor:pointer;background-color:#2a3f54; color:white;font-size:larger;font-weight:unset;}
+
+  tr th:hover{
+    background-color: #4c5f76
+
+  }
 </style>
 
 </head>

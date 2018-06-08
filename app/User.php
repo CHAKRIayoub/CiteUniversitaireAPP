@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'role', 'password',
+        'name', 'email', 'role', 'password','droits'
     ];
 
     /**
@@ -30,6 +30,11 @@ class User extends Authenticatable
     public function getRole()
     {
         return $this->role;
+    }
+
+    public function droits()
+    {
+        return $this->droits;
     }
 
     public function dossier()

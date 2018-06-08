@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="27px" height="50px" viewBox="0 0 27 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>Line + Line 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-31.000000, -3715.000000)" stroke-linecap="square" stroke="#979797" stroke-width="3">
+            <g id="screens" sketch:type="MSLayerGroup" transform="translate(-31.000000, 3253.000000)">
+                <g id="Line-+-Line-4" transform="translate(85.730406, 486.735029) scale(-1, 1) rotate(42.000000) translate(-85.730406, -486.735029) translate(70.230406, 469.235029)" sketch:type="MSShapeGroup">
+                    <path d="M0.246006794,1.81935395 L28.2907813,1.81935395" id="Line"></path>
+                    <path d="M30.1792855,34.5051949 L30.1792855,1.85910756" id="Line-3"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

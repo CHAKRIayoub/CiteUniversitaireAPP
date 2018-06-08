@@ -43,21 +43,19 @@ class UtilisateursController extends Controller
      */
     public function store(Request $request)
     {
-        //
-         $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|string',
-            'role' => 'required|string',
             'password' => 'required|string',
-            'password_confirmation' => 'required|string',
         ]);
 
-         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => bcrypt($request->password),
-        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = 'employe';
+        $user->droits = implode(",", $request->droits);
+        $user->password = bcrypt($request->password);
+        $user->save();
 
         
         Session::flash('success', 'Employé " ' .$request->name. ' " Ajoutée avec succées ');
