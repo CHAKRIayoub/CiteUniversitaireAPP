@@ -1,5 +1,13 @@
 <?php
 
+
+// $url = parse_url(getenv("DATABASE_URL"));
+$host = 'db4free.net';
+$username = 'chakriayoub';
+$password = 'chakriayoub';
+$database = 'citeunivesitaire';
+$port = '3306';
+
 return [
 
     /*
@@ -13,7 +21,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql_production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,6 +60,15 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+        ],
+
+        'mysql_production' => [
+            'driver' => 'mysql',
+            'host' => $host,
+            'port' => $port,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
         ],
 
         'pgsql' => [
