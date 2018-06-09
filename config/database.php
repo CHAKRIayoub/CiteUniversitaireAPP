@@ -64,14 +64,11 @@ return [
 
         'mysql_production' => [
             'driver' => 'mysql',
-            'host' => $host,
-            'port' => $port,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'host' => env('DB_HOST',$host),
+            'port' => env('DB_PORT',$port),
+            'database' => env('DB_DATABASE',$database),
+            'username' => env('DB_USERNAME',$username),
+            'password' => env('DB_PASSWORD',$password),
         ],
 
         'pgsql' => [
