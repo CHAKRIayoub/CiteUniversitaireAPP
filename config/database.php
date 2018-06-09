@@ -2,10 +2,10 @@
 
 
 // $url = parse_url(getenv("DATABASE_URL"));
-$host = "db4free.net";
-$username = "chakriayoub";
-$password = "chakriayoub";
-$database = "citeunivesitaire";
+$host = "fdb17.biz.nf";
+$username = "2330603_etudiants";
+$password = "Etudiants2017";
+$database = "2330603_etudiants";
 $port = 3306;
 
 return [
