@@ -2,11 +2,11 @@
 
 
 // $url = parse_url(getenv("DATABASE_URL"));
-$host = 'db4free.net';
-$username = 'chakriayoub';
-$password = 'chakriayoub';
-$database = 'citeunivesitaire';
-$port = '3306';
+$host = "db4free.net";
+$username = "chakriayoub";
+$password = "chakriayoub";
+$database = "citeunivesitaire";
+$port = 3306;
 
 return [
 
@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql_production'),
+    'default' => 'mysql_production',
 
     /*
     |--------------------------------------------------------------------------

@@ -108,7 +108,7 @@
 
       <div id="register" class="animate form">
 
- <!-- @if((strtotime(date('y-m-d')) >= strtotime($app->date_d)) && (strtotime($app->date_f) >= strtotime(date('y-m-d'))) )   -->
+ @if((strtotime(date('y-m-d')) >= strtotime($app->date_d)) && (strtotime($app->date_f) >= strtotime(date('y-m-d'))) )  
         <section class="login_content">
           
            <form method="POST" action="{{ route('register') }}" >
@@ -174,21 +174,21 @@
         </section>
 
 
-        <!-- content 
+        <!-- content -->
          @else
 
 <img src="{{ asset("images/error.jpg") }}" width="350px" >
-<!- <div class="panel panel-default">
+<!-- <div class="panel panel-default">
   <div class="panel-body" >
     <h2 style=" font-family: calibri light; color: red; " >la délai (entre le {{ $app->date_d}} et le {{ $app->date_f }} ) d'inscription était expiré </h2>
     </div>
-</div> 
+</div> -->
 <p class="change_link">
   Vous avez un Compte ? <a  href="#tologin" class="">Connexion</a>
 </p>
 
 
-        @endif-->
+        @endif
       </div>
 
       
