@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Application;
+
 
 class LoginController extends Controller
 {
@@ -19,6 +21,14 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    public function showLoginForm()
+    {
+        $app = Application::where('id', 1)->first();
+        return view('auth.login', ['app' => $app] );
+
+        // return view('auth.login', compact('app'));
+    }
 
     /**
      * Where to redirect users after login.
