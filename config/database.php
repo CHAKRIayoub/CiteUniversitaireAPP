@@ -69,6 +69,11 @@ return [
             'database' => env('DB_DATABASE',$database),
             'username' => env('DB_USERNAME',$username),
             'password' => env('DB_PASSWORD',$password),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
         ],
 
         'pgsql' => [
