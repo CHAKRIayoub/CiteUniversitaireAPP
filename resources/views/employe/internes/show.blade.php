@@ -223,7 +223,6 @@
 <script src="{{ asset("js/vue.js")}}"></script>
 <!-- ____________  Vue Form Instance  ___________ -->
 <script type="text/javascript">
-  Vue.use(VeeValidate);
   //v-validate="{ rules: { regex:  /.[0-9]{3,}$/} }"
   new Vue({    
       el : '#app',
