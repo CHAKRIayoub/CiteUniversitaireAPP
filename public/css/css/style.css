@@ -85,9 +85,7 @@ h2.title {
     -webkit-transition: opacity .5s ease-in-out;
 }
 
-a {
-    color: #c0392b;
-}
+
 
 img {
     max-width: 100%;
@@ -381,7 +379,7 @@ header {
     height: 30px;
 }
 
-.header-nav.smaller .menu-bar {
+.header-nav.smaller .menu-barr {
     top: 13px;
 }
 
@@ -668,7 +666,7 @@ header {
 /*-------------------------------------------------------------------------*/
 /* 4. Navigation Section
 /*-------------------------------------------------------------------------*/
-.menu-bar {
+.menu-barr {
     color: #ffffff;
     padding: 10px;
     position: absolute;
@@ -682,22 +680,8 @@ header {
     transition: all 0.3s;
 }
 
-.menu-bar img {
-    height: 30px;
-    width: 30px;
-    color: #ffffff;
-}
 
-/* Overlay style */
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(153, 204, 51, 0.9);
-    z-index: 9999;
-}
+
 
 /* Overlay closing cross */
 .overlay .overlay-close {
@@ -708,7 +692,7 @@ header {
     top: 40px;
     overflow: hidden;
     border: none;
-    background: url(../../images/img/icons/cross.png) no-repeat center center;
+    background: url(..././img/icons/cross.png) no-repeat center center;
     text-indent: 200%;
     color: transparent;
     outline: none;
@@ -842,7 +826,7 @@ header {
 .top-nav nav .menu-text {
     display: inline-block;
     position: relative;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -921,12 +905,12 @@ header {
     bottom: 6px;
 }
 
-.top-nav .menu-bar.menu-open {
+.top-nav .menu-barr.menu-open {
     z-index: 21;
     top: 35px;
 }
 
-.smaller .menu-bar.menu-open {
+.smaller .menu-barr.menu-open {
     top: 13px;
 }
 
@@ -968,220 +952,220 @@ header {
 }
 
 .sht-share-love-facebook-icon::before {
-    content: url("../../images/img/icons/Facebook_middle.svg");
+    content: url("../../img/icons/Facebook_middle.svg");
 }
 
 .sht-share-love-twitter-icon::before {
-    content: url("../../images/img/icons/twitter_middle.svg");
+    content: url("../../img/icons/twitter_middle.svg");
 }
 
 .sht-share-love-plus-icon::before {
-    content: url("../../images/img/icons/google_plus_middle.svg");
+    content: url("../../img/icons/google_plus_middle.svg");
 }
 
 .sht-share-love-instagram-icon::before {
-    content: url("../../images/img/icons/instagram_middle.svg");
+    content: url("../../img/icons/instagram_middle.svg");
 }
 
 .sht-cross-icon::before {
-    content: url("../../images/img/icons/cross-icon.svg");
+    content: url("../../img/icons/cross-icon.svg");
 }
 
 .sht-arrow_up-icon::before {
-    content: url("../../images/img/icons/arrow_up.svg");
+    content: url("../../img/icons/arrow_up.svg");
 }
 
 .sht-arrow_left-icon::before {
-    content: url("../../images/img/icons/arrow_left.svg");
+    content: url("../../img/icons/arrow_left.svg");
 }
 
 .sht-arrow_right-icon::before {
-    content: url("../../images/img/icons/arrow_right.svg");
+    content: url("../../img/icons/arrow_right.svg");
 }
 
 .sht-facebook-icon::before {
-    content: url("../../images/img/icons/facebook-icon.svg");
+    content: url("../../img/icons/facebook-icon.svg");
 }
 
 .sht-twitter-icon::before {
-    content: url("../../images/img/icons/twitter-icon.svg");
+    content: url("../../img/icons/twitter-icon.svg");
 }
 
 .sht-business-icon::before {
-    content: url("../../images/img/icons/business-icon.svg");
+    content: url("../../img/icons/business-icon.svg");
 }
 
 .sht-dope-icon::before {
-    content: url("../../images/img/icons/dope-icon.svg");
+    content: url("../../img/icons/dope-icon.svg");
 }
 
 .sht-download-icon::before {
-    content: url("../../images/img/icons/download-icon.svg");
+    content: url("../../img/icons/download-icon.svg");
 }
 
 .sht-download-icon-alt::before {
-    content: url("../../images/img/icons/install-icon.svg");
+    content: url("../../img/icons/install-icon.svg");
 }
 
 .sht-award-icon::before {
-    content: url("../../images/img/icons/award-icon.svg");
+    content: url("../../img/icons/award-icon.svg");
 }
 
 .sht-rating-icon::before {
-    content: url("../../images/img/icons/rating-icon.svg");
+    content: url("../../img/icons/rating-icon.svg");
 }
 
 .sht-left-arrow-icon::before {
-    content: url("../../images/img/icons/left-arrow-icon.svg");
+    content: url("../../img/icons/left-arrow-icon.svg");
 }
 
 .sht-right-arrow-icon::before {
-    content: url("../../images/img/icons/right-arrow-icon.svg");
+    content: url("../../img/icons/right-arrow-icon.svg");
 }
 
 .sht-install-icon::before {
-    content: url("../../images/img/icons/documents.svg");
+    content: url("../../img/icons/documents.svg");
 }
 
 .sht-play-icon::before {
-    content: url("../../images/img/icons/simple_pricing.svg");
+    content: url("../../img/icons/simple_pricing.svg");
 }
 
 .sht-globe-icon::before {
-    content: url("../../images/img/icons/globe.svg");
+    content: url("../../img/icons/globe.svg");
 }
 
 .sht-phone-icon::before {
-    content: url("../../images/img/icons/phone.svg");
+    content: url("../../img/icons/phone.svg");
 }
 
 .sht-email-icon::before {
-    content: url("../../images/img/icons/email.svg");
+    content: url("../../img/icons/email.svg");
 }
 
 .sht-facebook-footer-icon::before {
-    content: url("../../images/img/icons/facebook_footer.svg");
+    content: url("../../img/icons/facebook_footer.svg");
 }
 
 .sht-google-plus-footer-icon::before {
-    content: url("../../images/img/icons/google_plus_footer.svg");
+    content: url("../../img/icons/google_plus_footer.svg");
 }
 
 .sht-instagram-footer-icon::before {
-    content: url("../../images/img/icons/instagram_footer.svg");
+    content: url("../../img/icons/instagram_footer.svg");
 }
 
 .sht-twitter-footer-icon::before {
-    content: url("../../images/img/icons/twitter_footer.svg");
+    content: url("../../img/icons/twitter_footer.svg");
 }
 
 .sht-play-btn::before {
-    content: url("../../images/img/icons/play-btn.svg");
+    content: url("../../img/icons/play-btn.svg");
 }
 
 .sht-pause-icon::before {
-    content: url("../../images/img/icons/pause-btn.svg");
+    content: url("../../img/icons/pause-btn.svg");
 }
 
 .sht-how-it-works-1-icon::before {
-    content: url("../../images/img/icons/how_it_works_icon_1.svg");
+    content: url("../../img/icons/how_it_works_icon_1.svg");
 }
 
 .sht-how-it-works-2-icon::before {
-    content: url("../../images/img/icons/how_it_works_icon_2.svg");
+    content: url("../../img/icons/how_it_works_icon_2.svg");
 }
 
 .sht-how-it-works-3-icon::before {
-    content: url("../../images/img/icons/how_it_works_icon_3.svg");
+    content: url("../../img/icons/how_it_works_icon_3.svg");
 }
 
 .sht-info-icon::before {
-    content: url("../../images/img/icons/info-icon.svg");
+    content: url("../../img/icons/info-icon.svg");
 }
 
 .sht-analytics-icon::before {
-    content: url("../../images/img/icons/analytices.svg");
+    content: url("../../img/icons/analytices.svg");
 }
 
 .sht-simple-pricing-icon::before {
-    content: url("../../images/img/icons/simple_pricing.svg");
+    content: url("../../img/icons/simple_pricing.svg");
 }
 
 .sht-security-icon::before {
-    content: url("../../images/img/icons/security.svg");
+    content: url("../../img/icons/security.svg");
 }
 
 .sht-printer-icon::before {
-    content: url("../../images/img/icons/printer.svg");
+    content: url("../../img/icons/printer.svg");
 }
 
 .sht-artists-icon::before {
-    content: url("../../images/img/icons/artists.svg");
+    content: url("../../img/icons/artists.svg");
 }
 
 .sht-airplay-icon::before {
-    content: url("../../images/img/icons/airplay.svg");
+    content: url("../../img/icons/airplay.svg");
 }
 
 .sht-musicians-icon::before {
-    content: url("../../images/img/icons/musicians.svg");
+    content: url("../../img/icons/musicians.svg");
 }
 
 .sht-radio-icon::before {
-    content: url("../../images/img/icons/radio.svg");
+    content: url("../../img/icons/radio.svg");
 }
 
 .sht-bloggers-icon::before {
-    content: url("../../images/img/icons/bloggers.svg");
+    content: url("../../img/icons/bloggers.svg");
 }
 
 .sht-bag-icon::before {
-    content: url("../../images/img/icons/bag.svg");
+    content: url("../../img/icons/bag.svg");
 }
 
 .sht-cloud_sync-icon::before {
-    content: url("../../images/img/icons/cloud_sync.svg");
+    content: url("../../img/icons/cloud_sync.svg");
 }
 
 .sht-web-icon::before {
-    content: url("../../images/img/icons/web.svg");
+    content: url("../../img/icons/web.svg");
 }
 
 .sht-document-icon::before {
-    content: url("../../images/img/icons/documents.svg");
+    content: url("../../img/icons/documents.svg");
 }
 
 .sht-notification-icon::before {
-    content: url("../../images/img/icons/notifications.svg");
+    content: url("../../img/icons/notifications.svg");
 }
 
 .sht-feature_payments-icon::before {
-    content: url("../../images/img/icons/feature_payments.svg");
+    content: url("../../img/icons/feature_payments.svg");
 }
 
 .sht-playback-icon::before {
-    content: url("../../images/img/icons/playback.svg");
+    content: url("../../img/icons/playback.svg");
 }
 
 .sht-chat-icon::before {
-    content: url("../../images/img/icons/chat.svg");
+    content: url("../../img/icons/chat.svg");
 }
 
 .sht-marketing-icon::before {
-    content: url("../../images/img/icons/marketing.svg");
+    content: url("../../img/icons/marketing.svg");
 }
 
 .sht-cloud_sync-icon::before {
-    content: url("../../images/img/icons/cloud_sync.svg");
+    content: url("../../img/icons/cloud_sync.svg");
 }
 
 .sht-help-icon::before {
-    content: url("../../images/img/icons/help.svg");
+    content: url("../../img/icons/help.svg");
 }
 
 
 .sht-down-arrow-icon::before {
-    content: url("../../images/img/icons/down_arrow.svg");
+    content: url("../../img/icons/down_arrow.svg");
 }
 
 /*-------------------------------------------------------------------------*/
@@ -1896,7 +1880,7 @@ header {
 /* 10. Stats Section
 /*-------------------------------------------------------------------------*/
 .stats-bg {
-    background: url('../../images/img/plx2.jpeg') 50% 0 no-repeat fixed;
+    background: url('../../img/plx2.jpeg') 50% 0 no-repeat fixed;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     background-size: cover;
@@ -2299,7 +2283,7 @@ video {
     background-position: center;
     background-size: cover;
     overflow: hidden;
-    background: url("../../images/img/image_bg.jpg");
+    background: url("../../img/image_bg.jpg");
 }
 
 /*-------------------------------------------------------------------------*/
@@ -2366,13 +2350,13 @@ video {
 }
 
 .how-it-work-shape-1-bg {
-    background: url("../../images/img/icons/how_it_works_shape.svg") no-repeat;
+    background: url("../../img/icons/how_it_works_shape.svg") no-repeat;
     width: 112px;
     height: 128px;
 }
 
 .how-it-work-shape-2-bg {
-    background: url("../../images/img/icons/how_it_works_shape_2.svg") no-repeat;
+    background: url("../../img/icons/how_it_works_shape_2.svg") no-repeat;
     width: 121px;
     height: 142px;
 }

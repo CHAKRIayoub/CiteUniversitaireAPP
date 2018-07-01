@@ -2,14 +2,6 @@
 
 @section('content')
 
-<style type="text/css">
-	
-	.inputerror { box-shadow : 0px 0px 3px 1px red; }
-	form div div div span {  font-size: 11px; color: red; float: none;" }
-
-
-</style>
-
 <!-- __________________________________HTML_____________________________________________ -->
 
 <!-- ____________________ content ________________________ -->
@@ -20,7 +12,16 @@
         <div class="title_left">
             <h3>Dossier d'inscription </h3> 
         </div>
+    </div> <br><br><br><br><br>
+
+    @if ($message = Session::get('periode_inscr'))
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h3><strong>{{ $message }}</strong></h3>
     </div>
+    @else
         
     <div class="clearfix"></div>
         
@@ -797,6 +798,8 @@
             </form>
         </div>
     </div>
+
+        @endif
 </div>
 
 <!-- __________________________________JS_____________________________________________ -->
@@ -851,7 +854,7 @@
                
 
                 this.$validator.validateAll().then(res=>{
-                    if(res ) {
+                    if(res) {
                         return true;
                     } else {
                         alert('veuillez remplire les champs nécessaire');

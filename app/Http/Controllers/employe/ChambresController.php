@@ -9,17 +9,33 @@ use App\Chambre;
 use App\Bloc;
 use App\Hebergement;
 use Session;
+use \Auth;
+
 
 
 class ChambresController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $droits = explode(",",Auth::user()->droits);
+            if (in_array("gestion des chambres", $droits) || 
+                Auth::user()->role == 'admin'){
+                return $next($request);
+            }else{
+                return redirect('/employe');
+            }
+        }); 
+    }
+
+
      public function index()
     {
         //
 
         $chambres = Chambre::all();
         $blocs = Bloc::all();
-
 
         return view('employe.chambres.index', ['chambres' => $chambres,'blocs'=>$blocs] );
     }
@@ -134,12 +150,19 @@ class ChambresController extends Controller
      */
     public function destroy($id)
     {
-        //
 
         $chambre = Chambre::findOrFail($id);
+        
+        if($chambre->hebergements->count() > 0){
+            Session::flash('danger', 
+                'vous ne pouvez pas supprimer la chambre "
+                '.$chambre->id.','.$chambre->bloc->titre.'"
+                , il existe des Résidents dans cette chambres');
+            return redirect('/chambres');
+        }
         Chambre::destroy($id);
-
-        Session::flash('success', 'Chambre - supprimée avec succées ');
+        Session::flash('success', 'Chambre "'.$chambre->id.',
+            '.$chambre->bloc->titre.'"  supprimée avec succées ');
 
         return redirect('/chambres');
     }

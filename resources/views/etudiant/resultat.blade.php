@@ -29,37 +29,56 @@
     <!-- ____________________ content Titre ________________________ -->    
     <div class="page-title">
         <div class="title_left">
-            <h3>Menu</h3> <br>
+            <h3>Résutat</h3> <br>
         </div>
-    </div><br><br>
-
+    </div><br><br><br><br>
+   
+    
 
         <br>
     <div class="clearfix"></div>
     <br>
 
     <div class="row">
-       
-        @isset($res)
-
-           
+        @if ($message = Session::get('ll'))
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h3> <i class="fa fa-exclamation-triangle"></i> <strong>{{ $message }}</strong></h3>
+            </div><br><br>
             
+        @endif
+        @if ($message = Session::get('lp'))
             <div class="alert alert-success alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h3>{{ $res }}<br><br></h3> 
-            </div>
-
-             <a href="{{ url('/attestation/admission') }}" style="float: right" class="btn btn-success">
-                <i class="fa fa-download"></i> Aattestation d'admission
+                <h3><i class="fa fa-smile-o"></i> <strong> {{ $message }}</strong></h3>
+            </div><br><br>
+            <a href="{{ url('/attestation/admission') }}" style="float: right" class="btn btn-success">
+                    <i class="fa fa-download"></i> Aattestation d'admission
             </a>
-        @else
+        @endif
+         @if ($message = Session::get('la'))
+            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h3><strong> <i class="fa fa-meh-o"> {{ $message }}</strong></h3>
+            </div>
+        @endif
+         @if ($message = Session::get('lr'))
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h3><strong> <i class="fa fa-frown-o"> {{ $message }}</strong></h3>
+            </div>
+        @endif
 
-            @isset($chambre)
 
-
-            
+        @isset($chambre)
 
             <div class="col-md-8 col-md-offset-2" >
                 <div class="panel panel-info">
@@ -109,8 +128,6 @@
 
             @endisset
 
-
-        @endisset
 
 
 

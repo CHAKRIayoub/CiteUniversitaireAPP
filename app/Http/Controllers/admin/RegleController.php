@@ -6,9 +6,24 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Regle;
 use Session;
+use \Auth;
+
 
 class RegleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $droits = explode(",",Auth::user()->droits);
+            if (in_array("gestion des regles", $droits) || 
+                Auth::user()->role == 'admin'){
+                return $next($request);
+            }else{
+                return redirect('/employe');
+            }
+        }); 
+    }
+
     public function index()
     {
     	$regles = Regle::all();

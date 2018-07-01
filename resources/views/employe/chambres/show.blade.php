@@ -2,7 +2,10 @@
 @section('content')
 <!-- ______________________HTML___________________________________ -->
 <!-- ____________________ content ________________________ -->
-<div class="right_col" role="main">
+<div class="right_col" role="main" id="app">
+  <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
+  <h4>voulez-vous vraiment supprimer ce dossier ?</h4>
+  </modal>
   <div class="">
     <div class="page-title">
       <div style="float: left; font-size: medium; width: 100%">
@@ -24,7 +27,6 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:700px;">
           <div class="x_title">
-            <a href="{{ route('chambres.index') }}" style="float: right" class="btn btn-info" > <i class="fa fa-arrow-left"> </i>  Precedent</a>
             <h3><i class="fa fa-bed"> </i> chambre N° :  {{ $chambre->id}}</h3>
             <div class="clearfix"></div>
           </div>
@@ -99,6 +101,9 @@
                       <th class="column-title">
                         <h4>Date naissance</h4>
                       </th>
+                      <th class="column-title">
+                        <h4>Actions</h4>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -112,6 +117,43 @@
                         {{ $heberg->User->Dossier['telephone'] }} 
                       </td>
                       <td class=" ">{{ $heberg->User->Dossier['date_naissance'] }} </td>
+
+                      <td>
+                      <a  data-toggle="tooltip" 
+                        data-placement="bottom" 
+                        data-original-title="plus d'informations" 
+                        href="/internes/{{ $heberg->User->Dossier->user_id }}">
+                      <i style="color:#5cb85c;" class="fa fa-eye" ></i>
+                      </a>&nbsp;&nbsp;&nbsp;
+                      <!-- ___________  formulaire supprimer _________ -->
+                      {!! Form::open([
+                      'method' => 'DELETE',
+                      'url' => ['internes', $heberg->User->Dossier->id  ],
+                      'style' => 'display:inline',
+                      'id' => $heberg->User->Dossier->id,
+                      ]) !!}
+                      <a data-toggle="tooltip" 
+                        data-placement="bottom" 
+                        data-original-title="supprimer" 
+                        onclick=" app.del({{ $heberg->User->Dossier->id }}); return false;">
+                      <i style="color: tomato" class="fa fa-trash-o"></i>
+                      </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a  data-toggle="tooltip" 
+                        data-placement="bottom" 
+                        data-original-title="Transfert" 
+                        href="/transfert/{{ $heberg->User->Dossier->user_id }}">
+                      <i style="color:#4444FF;" class="fa fa-exchange" ></i>
+                      </a>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <a data-toggle="tooltip" 
+                        data-placement="bottom" 
+                        data-original-title="Permutation" 
+                        href="/permutation/{{ $heberg->User->Dossier->user_id }}">
+                      <i style="color:#000;" class="fa fa-handshake-o" ></i>
+                      </a>
+                      {!! Form::close() !!}
+                      
+                    </td>
                     </tr>
                     @endforeach
                     @endif
@@ -127,31 +169,81 @@
   <!-- /footer content -->
 </div>
 <
-<!-- __________________________________JS_____________________________________________ -->
+<!-- ____________________JS_________________________________________ -->
+
 <!-- ____________  required files  ___________ -->
 <script src="{{ asset("js/vue.js")}}"></script>
-<script src="{{ asset("js/vee-validate.js")}}"></script>
-<!-- ____________  Vue Form Instance  ___________ -->
-<script type="text/javascript">
-  Vue.use(VeeValidate);
-  //v-validate="{ rules: { regex:  /.[0-9]{3,}$/} }"
+<script type="text/x-template" id="modal-template">
+  <transition name="modal">
+      <div class="modal-mask" @click="closeM()" v-show="show">
+          <div class="modal-container" @click.stop >
+              <!-- ____________  titre modal  ___________ -->
+              <div class="modal-header"> Confirmez votre choix </div>
+              <!-- ____________  body modal  ___________ --> 
+              <div class="modal-body"><slot></slot></div>
+              <!-- ____________  footer modal  ___________ -->
+              <div>
+                  <!-- ____________  button confirmer  ___________ -->
+                  <button style="float: right;" class="btn btn-danger" @click="sendConfirm" >
+                      <i class="fa fa-trash-o" aria-hidden="true"></i> supprimer
+                  </button>
   
-  new Vue({    
-      el : '#form',
+                  <!-- ____________  button annuler  ___________ -->
+                  <button class="btn btn-success" @click="sendCancel" >
+                    <i class="fa fa-arrow-left"></i> annler
+                  </button>
+              </div> 
+            </div>
+          </div>
+      </div>
+  </transition>
+</script>
+<script type="text/javascript">
+  //____________  modal component  ___________ -->
+  Vue.component('modal', {
+      template: '#modal-template',
+      props: ['show'],
+      methods: {
+          closeM: function () {      
+              this.$emit('close');
+          },
+          sendConfirm: function () {      
+              this.$emit('confirm');
+          },
+          sendCancel: function () {      
+              this.$emit('cancel');
+          }
+      },
+      mounted: function () {  
+          document.addEventListener("keydown", (e) => {        
+              if (this.show && e.keyCode == 27) {            
+                  this.closeM();
+              }    
+          });
+      }
+  });
+  
+  var app = new Vue({    
+      el : '#app',
       data : {
+          show: false, 
+          delvar: false,
+          idtodel: '',
           id : '{{ $chambre->id }}',
           chargement : true
       },
       methods: {
-          submitForm() {
-              this.$validator.validateAll().then(res=>{
-                  if(res) {
-                      return true;
-                  } else {
-                      alert('veuillez remplire les champs nécessaire');
-                      return false;
-                  }
-              })
+          del : function(id, l){
+              //this.blocName = l;
+              this.show = true;
+              this.idtodel = id;
+          },
+          deleteBloc : function (btn) {
+              $('#'+this.idtodel).submit();
+          },
+          cancelDel:function (btn) {
+              this.show = false;
+              this.idtodel = '';
           }
       },
       mounted: function () {

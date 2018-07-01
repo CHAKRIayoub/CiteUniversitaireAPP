@@ -92,7 +92,7 @@
                         
                         <div class="go-down-icon">
                                 
-                            <a href="#" class="hidden-xs"><i class="sht sht-down-arrow-icon"></i></a>
+                            <a href="#how-it-works" class="hidden-xs"><i class="sht sht-down-arrow-icon"></i></a>
                         </div>
                     </div>
                 </div>
@@ -102,38 +102,7 @@
         <!-- Image Background End -->
     </header>
     <!-- client logo section Start-->
-    <section id="client-logo" class="client-logo-section padding-top40 padding-bottom20">
-        <div class="container">
 
-            <div class="row">
-                <div class="col-sm-10 col-sm-offset-1">
-                    <div class="client-logo-section-inner">
-                        <div class="row">
-                            <div class="col-sm-2 text-center">
-                                <img src="{{ asset("images/img/brands/1.png") }}" alt="Université Mohammed 5 de rabat">
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <img src="{{ asset("images/img/brands/2.png") }}" alt="Université Hassan 2 de Casablanca">
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <img src="{{ asset("images/img/brands/6.png") }}" alt="Université Cadi Ayyad de Marrakech">
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <img src="{{ asset("images/img/brands/3.png") }}" alt="Université Abdelmalek Essaadi">
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <img src="{{ asset("images/img/brands/4.png") }}" alt="Université Sidi Mohamed Ben Abdellah de Fes">
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <img src="{{ asset("images/img/brands/5.jpeg") }}" alt="Université Mohammed 1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
     <!-- /client logo section Start-->
     <div class="modal fade modal-fullscreen force-fullscreen" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModal" aria-hidden="true">
@@ -158,48 +127,44 @@
     <section class="header-nav">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="logo-brand">
+                <div class="col-sm-3">
+                    <div class="logo-brand" style="float: left">
                         <h1><a id="logo" href="#"><img src="{{ asset("images/img/aa.png") }}" alt="logo"></a></h1>
 
                     </div>
                 </div>
-                <div class="col-sm-6 text-right">
+                <div class="col-sm-9" >
                     <div class="top-nav">
                         <nav>
+                            <style type="text/css">
+                            a:hover, a:active, a:visited, a:focus{
+                                text-decoration: none;
+                                transition: all 1s ease;
+                                color: #fff;
+                            }</style>
+                            <div class="menu-barr"  style="float: right; padding-top: 20px;">
 
-                            <div class="menu-bar">
+                                 <a href="#how-it-works" class="menu-text" style="color: #E8E8E8;">Comment ça marche</a>&emsp;&emsp;
 
+                                <a href="#you-love" class="menu-text" style="color: #E8E8E8;">CARACTÉRISTIQUES </a>&emsp;&emsp;
+                               
+                                <a href="#download-our-app" class="menu-text" style="color: #E8E8E8;">Trouvez Nous</a>&emsp;&emsp;
 
-                                <span class="menu-text" data-text='Close'>Menu</span>
+                                 @if (Route::has('login'))
+                                    @auth
+                                        <a href="{{ url('/home') }}" class="menu-text" style="color: #E8E8E8;">Accueil</a>&emsp;&emsp;
+                                    
+                                    @else
+                                        <a href="{{ url('/login') }}" class="menu-text" style="color: #E8E8E8;" ><span>Connexion</span></a>
+                                    @endauth
 
-                                <div class="menu-toggle"></div>
-                            </div>
-                            <div class="menu-container js-full-height">
-                                <div class="menu-inner">
-                                    <ul class="menu">
-                                        <li><a href="#home"><span>Accueil</span></a></li>
-                                        <li><a href="#how-it-works"><span>Comment ça marche</span></a></li>
-                                        <li><a href="#our-stats"><span>Nos Statistiques</span></a></li>
-                                        <li><a href="#screenshots"><span>Photos</span></a></li>
-                                        <li><a href="#feedback"><span>Les avis</span></a></li>
-                                        <li><a href="#download-our-app"><span>Trouvez-Nous</span></a></li>
-                                        <li><a href="#subscribe"><span>Contact</span></a></li>
-                                        <li>
-                                        @if (Route::has('login'))
-                                            @auth
-                                                <a href="{{ url('/home') }}"><span>accueil</span></a>
-                                            @else
-                                                <a href="{{ url('/login') }}"><span>Connexion</span></a>
-                                            @endauth
-                                        @endif
-                                        </li>
-                                    </ul>
-                                </div>
+                                @endif
+
                             </div>
                         </nav>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -233,7 +198,7 @@
                             <h4>inscrivez-vous</h4>
 
                             <p>
-                                Inscription
+                                Crée un compte
                             </p>
                         </div>
                     </div>
@@ -265,84 +230,7 @@
     </section>
     <!-- How it works Section End -->
     <!-- Stats Section Start -->
-    <section id="our-stats" class="stats-bg  light">
-        <div class="stats-bg-overlay">
-            <div class="container padding-top100 padding-bottom100">
-                <!-- row start -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title text-center wow fadeInUp" data-wow-delay="300ms">
-                            <h2 class="title wow fadeInUp" data-wow-delay="300ms">Nos Statistiques</h2>
-
-                            <p class="wow fadeInUp sub_title" data-wow-delay="300ms">
-                                Nous sommes fiers de ces statistiques
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- row end -->
-                <!-- row start -->
-                <div class="row">
-                    <!-- col-md-4 start -->
-                    <div class="col-md-4 col-sm-4 col-xs-12 wow fadeIn">
-                        <!-- stat-box start -->
-                        <div class="stat-box padding-top70 text-center">
-                            <div class="stat-icon">
-                                <span class="fa fa-bed" style="font-size: 80px"></span>
-                            </div>
-                            <div class="stat-box-info">
-                                <span class="stats" data-from="0" data-to="10000" data-speed="3000"
-                                      data-refresh-interval="50"></span>
-                                <h4>
-                                    Places
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- stat-box end -->
-                    </div>
-                    <!-- col-md-4 end -->
-                    <!-- col-md-4 start -->
-                    <div class="col-md-4 col-sm-4 col-xs-12 wow fadeIn">
-                        <!-- stat-box start -->
-                        <div class="stat-box padding-top70 text-center">
-                            <div class="stat-icon">
-                                <span class="fa fa-group fa-5x"></span>
-                            </div>
-                            <div class="stat-box-info">
-                                <span class="stats" data-from="2450" data-to="2573" data-speed="5000"
-                                      data-refresh-interval="50"></span>
-                                <h4>
-                                    Rating
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- stat-box end -->
-                    </div>
-                    <!-- col-md-4 end -->
-                    <!-- col-md-4 start -->
-                    <div class="col-md-4 col-sm-4 col-xs-12 wow fadeIn">
-                        <!-- stat-box start -->
-                        <div class="stat-box padding-top70 text-center">
-                            <div class="stat-icon">
-                                <span class="fa fa-trophy fa-5x"></span>
-                            </div>
-                            <div class="stat-box-info">
-                                <span class="stats" data-from="0" data-to="7" data-speed="1000"
-                                      data-refresh-interval="50"></span>
-                                <h4>
-                                    Récompenses
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- stat-box End -->
-                    </div>
-                    <!-- col-md-4 end -->
-                    <!-- col-md-4 start -->
-                </div>
-                <!-- row end -->
-            </div>
-        </div>
-    </section>
+   
     <!-- Stats Section End -->
     <!-- cHouse-timeline Start -->
    
@@ -448,83 +336,7 @@
     </section>
     <!--  Features You Will Love End -->
     <!-- Testimonial Section Start -->
-    <section id="feedback" class="padding-top100 padding-bottom80 testimonial-wrapper">
-        <div class="container">
-            <!-- row start -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title text-center wow fadeInUp" data-wow-delay="300ms">
-                        <h2 class="title wow fadeInUp" data-wow-delay="300ms">Les Avis</h2>
-                        <span class="quote-icon icon-quote"></span>
-                    </div>
-                </div>
-            </div>
-            <!-- row end -->
-            <!-- row start -->
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <div class="testimonials padding-top30">
-                        <div role="tabpanel">
-                            <!-- Tab panes start -->
-                            <div class="tab-content wow ">
-                                <div role="tabpanel" class="tab-pane fade in active" id="testimonial-1">
-                                    <blockquote>
-                                        Trés bonne services
-                                    </blockquote>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="testimonial-2">
-                                    <blockquote>
-                                        trés bonne services,Merci Beaucoup
-                                    </blockquote>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="testimonial-3">
-                                    <blockquote>
-                                        Merci pour les bonne services.
-                                    </blockquote>
-                                </div>
-                            </div>
-                            <!-- Tab panes end-->
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs padding-top50" role="tablist">
-                                <li role="presentation" class="active">
-                                    <div class="client-image">
-                                        <a href="#testimonial-1" aria-controls="testimonial-1" role="tab"
-                                           data-toggle="tab"><img src="images/img/team/team-member-1.jpg" alt=""></a>
-                                    </div>
-                                    <div class="client-info">
-                                        <span class="client-name">Othmane Bouarda</span>
-                                        <span class="client-company-name">Etudiant <strong>Université Rabat</strong></span>
-                                    </div>
-                                </li>
-                                <li role="presentation">
-                                    <div class="client-image">
-                                        <a href="#testimonial-2" aria-controls="testimonial-2" role="tab"
-                                           data-toggle="tab"><img src="images/img/team/team-member-2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="client-info">
-                                        <span class="client-name">Ayoub Chakri</span>
-                                        <span class="client-company-name">Etudiant <strong>Université Fes</strong></span>
-                                    </div>
-                                </li>
-                                <li role="presentation">
-                                    <div class="client-image">
-                                        <a href="#testimonial-3" aria-controls="testimonial-3" role="tab"
-                                           data-toggle="tab"><img src="images/img/team/team-member-3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="client-info">
-                                        <span class="client-name">Hicham</span>
-                                        <span class="client-company-name">Pr <strong>Université Casablanca</strong></span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- Nav tabs End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- row end -->
-        </div>
-    </section>
+    
     <!-- Testimonial Section End -->
 
     <section id="download-our-app" class="download-our-app ">
@@ -540,56 +352,11 @@
                     <style>.mapouter{text-align:right;height:500px;width:100%;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}</style>
                 </div>
                 </div>
-
-            
     </section>
 
 
     <!-- Email Update Section Start -->
-    <section id="subscribe" class="email-update-bg light padding-top200 padding-bottom180">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-7">
-                    <div class="section-title wow fadeInUp" data-wow-delay="300ms">
-                        <h2 class="title wow fadeInUp" data-wow-delay="300ms">Contacter nous</h2>
-
-                        <p class="wow fadeInUp" data-wow-delay="300ms">
-                            Contactez nous pour savoir plus d'information <br/> Nous vous répondrons dès que possible.
-                            :)
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <form id="mc-form">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6 text-center">
-                        <div class="padding-top70">
-
-                            <div class="form-group">
-                                <input type="email" class="form-control email-update wow fadeInUp" id="mc-email"
-                                       placeholder="Votre Email">
-                                <label class="padding-top20" for="mc-email" id="mc-notification"></label>
-
-                                
-                                
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn subscribe-btn wow fadeInUp">Envoyer</button>
-                    </div>
-                </form>
-            </div>
-            <div class="email-update-hand">
-            </div>
-        </div>
-
-    </section>
+   
     <!-- Email Update Section End -->
    
     <footer id="main-footer" class="padding-top30 padding-bottom30">
@@ -598,14 +365,29 @@
                 <div class="col-sm-10 col-sm-offset-1 col-xs-12">
                     <nav class="footer-nav">
                         <ul class="footer-nav-inner">
-                            <li><a href="#home"><span>Accueil</span></a></li>
-                            <li><a href="#how-it-works"><span>Comment ça marche</span></a></li>
-                            <li><a href="#our-stats"><span>Nos Statistiques</span></a></li>
-                            <li><a href="#screenshots"><span>Photos</span></a></li>
-                            <li><a href="#feedback"><span>Les avis</span></a></li>
-                            <li><a href="#download-our-app"><span>Trouvez-Nous</span></a></li>
-                            <li><a href="#subscribe"><span>Contact</span></a></li>
+                            <li>
+                                <a href="#how-it-works">Comment ça marche</a>
+                            </li>
 
+                            <li><a href="#you-love">CARACTÉRISTIQUES</a></li>
+                           
+                            <li><a href="#download-our-app">Trouvez Nous</a></li>
+
+                             @if (Route::has('login'))
+                                @auth
+                                    <li>
+                                        <a href="{{ url('/home') }}">Accueil</a>
+                                    </li>
+                                
+                                @else
+                                    <li>
+                                        <a href="{{ url('/login') }}" >
+                                            Connexion
+                                        </a>
+                                    </li>
+                                @endauth
+
+                            @endif
                         </ul>
                     </nav>
                 </div>
@@ -623,7 +405,7 @@
                 <div class="container">
                     <div class="col-sm-12 text-center">
                         <div class="footer-copyright">
-                            <p>© 2018 <a href="">Cité Universitaire</a>. Developed by <a href=""> ---- </a>.</p>
+                            
                         </div>
                     </div>
                 </div>

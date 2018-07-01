@@ -17,7 +17,7 @@
         </a></li>
 
         <li><a href="/internes" >
-            <i class="fa fa-group"></i> Gestion des Internes
+            <i class="fa fa-group"></i> Gestion des Résidents
         </a></li>
 
         <li><a href="/regles" >

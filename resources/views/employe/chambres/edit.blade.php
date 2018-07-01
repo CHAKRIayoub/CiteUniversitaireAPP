@@ -59,7 +59,10 @@
           <label class="control-label col-md-4 col-sm-2 col-xs-12" for="titre">Capacité : <span class="required"></span>
           </label>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <input class="form-control" type="number" name="capacite" v-model="capacite" v-validate="'required'" value="{{ $chambre->id }}">
+            <input v-bind:class="{inputerror : errors.has('capacite')}" class="form-control" type="number" name="capacite" v-model="capacite" v-validate="'required|numeric|min:{{count($chambre->hebergements)}}'" value="{{$chambre->capacite}}" min="{{count($chambre->hebergements)}}">
+            <span v-show="errors.has('capacite')" style="color: red; float: right;">
+                Capacité incorrecte
+            </span>
           </div><br><br><br>
           <!-----------  Select nouveau bloc   ------------>
           <div class="form-group">
@@ -110,7 +113,8 @@
   new Vue({    
       el : '#form',
       data : {
-          id : '{{ $chambre->id }}',
+          capacite : '{{ $chambre->capacite }}',
+          min: '{{ count($chambre->hebergements) }}',
           chargement : true
       },
       methods: {

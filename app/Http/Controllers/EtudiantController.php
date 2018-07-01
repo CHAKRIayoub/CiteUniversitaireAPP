@@ -13,7 +13,6 @@ use Session;
 use App\Application;
 use PDF;
 
-
 class EtudiantController extends Controller
 {
     public function __construct()
@@ -25,41 +24,48 @@ class EtudiantController extends Controller
     }
 
     public function resultat(){
+
         $app = Application::where('id', 1)->first();
+        $user = User::find( Auth::user()->id );
+
         $dated = strtotime($app->date_d);
         $datef = strtotime($app->date_f);
-        $datec = strtotime(date('y-m-d'));
+        $datec = strtotime(date('y-m-d')); 
 
-        if ( ($datec >= $dated) && ($datef >= $datec ) ){
-
-            return view('employe.inscriptions.dateinv');
-
+        if($user->hebergement){  
+            $c = Chambre::where('id','=',$user->hebergement->chambre_id )->first();
+            return view('etudiant.resultat',['chambre'=>$c ,'hebergement' => $user->hebergement ] );
         }else{
+            if ( ($datec >= $dated) && ($datef >= $datec ) ){
+                Session::flash('ll', 'vous ne pouvez pas acceder, période d\'inscription en cours !');
 
-            $h = Hebergement::where('user_id','=',Auth::user()->id )->get();
-            if($h->count() >= 1){
-                $c = Chambre::where('id','=',$h[0]->chambre_id )->first();
-                return view('etudiant.resultat',['chambre'=>$c ,'hebergement'=>$h[0] ] );
+                return view('etudiant.resultat' );
             }else{
-                $list=Dossier::list_accpt(Auth::user()->dossier->genre);
-                $exist = false;
-                foreach ($list as $key => $value) {
-                    if ($value->user_id == Auth::user()->id ) {
-                        $exist = true; break;
+                if($user->dossier){
+                    $l=Dossier::list_accpt(Auth::user()->dossier->genre);
+                    $list=[];
+                    for ($i = 0; $i < $l['disp']; $i++){
+                      if ($i > count($l['list']) - 1) break; 
+                      $list[] = $l['list'][$i];
                     }
-                }
-                if ($exist) {
-                    $res = 'félicitation vous étes sélectioné parmi les résident, nous vous invitons à payé les droits de Logement ';
+                    $exist = false;
+                    foreach ($list as $key => $value) {
+                        if ($value->user_id == Auth::user()->id ) {
+                            $exist = true; break;
+                        }
+                    }
+                    if ($exist) {
+                        Session::flash('lp', 'félicitation vous étes sélectioné parmi les résident, nous vous invitons à payé les droits de Logement ');
 
-                    return view('etudiant.resultat',['res'=>$res  ] );
-                    
+                        return view('etudiant.resultat' );
+                        
+                    }else{
+                        Session::flash('la', 'Désolé, vous etes en liste d\'attente');
+                        return view('etudiant.resultat');
+                    }
                 }else{
-                    
-                    $res = 'Désolé, votre demande est refusé ';
-
-                    return view('etudiant.resultat',['res'=>$res  ]
-
-                    );
+                    Session::flash('lr', 'on n\'a pas trouver votre dossier !' );
+                    return view('etudiant.resultat');
                 }
             }
         }
@@ -68,17 +74,22 @@ class EtudiantController extends Controller
     public function index()
     {
 
-    	$user = User::find( Auth::user()->id );
-        if($user->dossier){
+        $app = Application::where('id', 1)->first();
+        $user = User::find( Auth::user()->id );
 
-            return view('etudiant.index');
+        $dated = strtotime($app->date_d);
+        $datef = strtotime($app->date_f);
+        $datec = strtotime(date('y-m-d')); 
 
-        }
-        else{
-        	
-            $villes = Ville::all();
-            return view('etudiant.dossier.inscription',['villes' => $villes]);
-        
+        if($user->dossier){        
+            return view('etudiant.dossier.index');
+        }else{
+            if ( ($datec >= $dated) && ($datef >= $datec ) ){
+                $villes = Ville::all();
+                return view('etudiant.dossier.inscription',['villes'=>$villes]);
+            }else{
+                return view('employe.inscriptions.dateinv');
+            }
         }
     	
     }

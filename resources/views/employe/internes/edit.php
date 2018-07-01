@@ -1,5 +1,4 @@
 @extends('layouts.template')
-
 @section('content')
 
 <style type="text/css">
@@ -42,7 +41,7 @@
         <!-- ____________  fomr div ___________ -->
         <div class="col-md-10 col-md-offset-1 ">
             <!-- ____________  form ___________ -->
-            <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('dossier.store') }}">{{ csrf_field() }}
+            <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('dossier.update') }}">{{ csrf_field() }}{{ method_field('PATCH') }}
 
                 <!-- ____________  chrgement ___________ -->
                 <transition name="modal" v-if="chargement" >

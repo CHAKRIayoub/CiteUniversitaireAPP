@@ -1,4 +1,3 @@
-<?php //dd($errors) ?>
 @extends('layouts.template')
 @section('content')
 <style type="text/css">
@@ -9,16 +8,14 @@
   <!-- ____________________ content Titre ________________________ -->    
   <div class="page-title">
     <div style="float: left; font-size: medium; width: 100%">
-      <ol class="breadcrumb" style="background-color: #eee">         
+      <ol class="breadcrumb" style="background-color: #eee"  >         
         <li><a href="/home">
           <i class="fa fa-home"></i> Acceuil
         </a></li>
-        <li><a href="/utilisateurs">
-          <i class="fa fa-users"></i> Gestion des Utilisateurs
-        </a></li>
         <li class="active">
-          <i class="fa fa-user-plus"></i> Ajouter un Utilisateur
-        </li>  
+          <i class="fa fa-cogs"></i> Modifier Mon Compte
+        </li>
+   
       </ol>
     </div>    
   </div>    
@@ -34,10 +31,9 @@
       </div>
     @endif 
     <!-- ____________  errors ___________ -->
-
-    @if ( $errors->any() )
+    @if (count($errors) < 0)
       <div class="alert alert-danger">
-        <strong>Whoops!</strong> il existe quelques erreurs dans les entrés
+        <strong>Whoops!</strong> There were some problems with your input.
         <br><br>
         <ul>
           @foreach ($errors->all() as $error)
@@ -49,7 +45,7 @@
     <div class="x_panel">
       <div class="x_title">
           <div class="h3">
-            <i class="fa fa-user-plus"></i> Ajouter un employée
+            <i class="fa fa-cogs"></i> Modifier Mon Compte
           </div>
           <div class="clearfix"></div>
       </div>
@@ -57,8 +53,8 @@
         <!-- ____________  fomr div ___________ -->
         <div class="col-md-10 col-xs-12 col-md-offset-1 ">
           <!-- ____________  form ___________ -->
-          <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('utilisateurs.store') }}">
-            {{ csrf_field() }}
+          <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('parametres', Auth::user()->id) }}">
+            {{ csrf_field() }} {{ method_field('PATCH') }}
             <!-- ____________  chrgement ___________ -->
             <transition name="modal" v-if="chargement" >
               <div class="loading-mask">    
@@ -71,64 +67,50 @@
             <label class="control-label col-md-2 col-sm-2 col-xs-12">
               Nom et Prenom * <span class="required"></span>
             </label>
-            <div class="col-md-8 col-sm-12 col-xs-12 {{ $errors->has('name') ? ' has-error' : '' }} ">  
-                <input value="{{ old('name') }}" class="form-control" type="text" name="name">
-                @if ($errors->has('name'))
-                  <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
+            <div class="col-md-8 col-sm-12 col-xs-12">  
+                <input  v-bind:class="{inputerror : errors.has('name')}"
+                        v-model="name" 
+                        v-validate="'required|alpha_spaces|min:3|max:14'" 
+                        value="{{ Auth::user()->name }}" 
+                        class="form-control" type="text" 
+                        name="name">
+                <span style="color: red" v-show="errors.has('name')">
+                    nom incorrecte
+                </span>
             </div><br><br><br>
             
             <label class="control-label col-md-2 col-sm-2 col-xs-12" >
               E-mail * <span class="required"></span>
             </label>
-            <div class="col-md-8 col-sm-12 col-xs-12 {{ $errors->has('email') ? ' has-error' : '' }} ">
-              <input value="{{ old('email') }}" class="form-control" type="email" name="email">
-              @if ($errors->has('email'))
-                <span class="text-danger">{{ $errors->first('email') }}</span>
-              @endif
+            <div class="col-md-8 col-sm-12 col-xs-12">
+              <input  v-bind:class="{inputerror : errors.has('email')}"
+                      v-model="email" 
+                      v-validate="'required|email'" 
+                      value="{{ Auth::user()->email }}" 
+                      class="form-control" type="email" name="email">
+              <span style="color: red" v-show="errors.has('email')">
+                    email incorrecte
+              </span>
             </div><br><br><br>
 
             <label class="control-label col-md-2  col-sm-2 col-xs-12">
               Mot de Passe * <span class="required"></span>
             </label>
-            <div class="col-md-8 col-sm-12 col-xs-12 {{ $errors->has('password') ? ' has-error' : '' }}" >  
-              <input class="form-control" type="password" name="password">
-              @if ($errors->has('password'))
-                <span class="text-danger">{{ $errors->first('password') }}</span>
-              @endif
+            <div class="col-md-8 col-sm-12 col-xs-12">  
+              <input  v-bind:class="{inputerror : errors.has('password')}"
+                      v-model="password" 
+                      v-validate="'required|min:6'" 
+                      class="form-control" type="password" name="password">
+              <span style="color: red" v-show="errors.has('password')">
+                    mot de passe incorrecte
+              </span>
             </div><br><br><br>
-            <label class="control-label col-md-2 col-sm-2 col-xs-12">
-              Droits d'accées * <span class="required"></span>
-            </label>
-            <div class="col-md-8 col-sm-12 col-xs-12 {{ $errors->has('droits') ? ' has-error' : '' }} ">
-              <select  class="form-control" name="droits[]" multiple="multiple">
-                <option value="gestion des blocs">
-                  Gestion des Blocs
-                </option>
-                <option value="gestion des chambres">
-                  Gestion des Chambres
-                </option>
-                <option value="gestion des dossiers">  
-                  Gestion des Dossiers
-                </option>
-                <option value="gestion des residents">
-                  Gestion des Internes
-                </option>
-                <option value="gestion des regles">
-                  Gestion des Régles
-                </option>
-                <option value="gestion des dates">
-                  Gestion des Dates
-                </option>
-              </select>
-              @if ($errors->has('droits'))
-                <span class="text-danger">{{ $errors->first('droits') }}</span>
-              @endif
-            </div>
+
+            
             <br><!--______________ form buttons _____________ -->
             <div class="col-md-2 col-sm-12 col-xs-12 col-md-offset-8" >
               <button style="margin-top: 15px" :disabled="errors.any()" type="submit" class="btn btn-success btn-block" v-on:click="submitForm" >
-                <i class="fa fa-user-plus"></i> Ajouter
+                <i class="fa fa-save"></i> Modifier
               </button>
             </div>
           </form>
@@ -149,7 +131,9 @@
         el : '#form',
         data() {
             return{
-                titre : '',
+                name : '{{ Auth::user()->name }}',
+                email: '{{ Auth::user()->email }}',
+                password: '',
                 chargement: true
             }
         },

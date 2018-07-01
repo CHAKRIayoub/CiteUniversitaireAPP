@@ -16,9 +16,10 @@ class DossierController extends Controller
        
     public function index()
     {
-        // $dossier = Dossier::where('user_id', Auth::user()->id)->first();
-        return view('etudiant.dossier.index');
-        // , ['dossier' => $blocs] );
+       
+            return redirect('/home');
+        
+        
     }
    
     public function store(Request $request)

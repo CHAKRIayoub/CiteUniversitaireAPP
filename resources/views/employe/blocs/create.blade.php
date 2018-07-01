@@ -58,9 +58,7 @@
               Libellé : <span class="required"></span>
             </label>
             <div class="col-md-6 col-sm-12 col-xs-12">
-              <!-- _________________ titre Input __________________ -->
-              <input class="form-control" type="text" name="titre" v-model="titre" v-validate="'required|alpha_spaces'">
-              <!-- _____________ titre error _________ -->
+              <input v-bind:class="{inputerror : errors.has('titre')}" class="form-control" type="text" name="titre" v-model="titre" v-validate="'required'">
               <span v-show="errors.has('titre')" style="color: red; float: right;">
                 titre incorrecte
               </span>
@@ -69,13 +67,19 @@
               Nombre des chambres : <span class="required"></span>
             </label>
             <div class="col-md-6 col-sm-12 col-xs-12">
-              <input class="form-control" type="number" name="nbch">
+              <input v-bind:class="{inputerror : errors.has('nbch')}" class="form-control" type="number" name="nbch" v-model="nbch" v-validate="'required|numeric|min:0'" >
+              <span v-show="errors.has('nbch')" style="color: red; float: right;">
+                Nombre incorrecte
+              </span>
             </div><br><br><br>
             <label class="control-label col-md-4 col-sm-2 col-xs-12">
               Capacité de chaque chambres : <span class="required"></span>
             </label>
             <div class="col-md-6 col-sm-12 col-xs-12">  
-              <input class="form-control" type="number" name="cpch"> 
+              <input  v-bind:class="{inputerror : errors.has('cpch')}" class="form-control" type="number" name="cpch" v-model="cpch" v-validate="'required|numeric|min:0'"> 
+              <span v-show="errors.has('cpch')" style="color: red; float: right;">
+                Nombre incorrecte
+              </span>
             </div><br><br><br>
             <!-- radio genre -->
             <div class="form-group">
@@ -94,13 +98,16 @@
                 </label>
               </div>
             </div>
-          </form>
-          <div class="col-md-4 col-sm-12 col-xs-12 col-md-offset-9" >
-            <!--______________ form buttons _____________ -->
-            <button style="margin-top: 15px" :disabled="errors.any()" style="float: right;" type="submit" class="btn btn-success" v-on:click="submitForm" >
-                <i class="fa fa-plus"></i>  Ajouter
-            </button>
-          </div>
+            <div class="col-md-4 col-sm-12 col-xs-12 col-md-offset-9" >
+              <span v-show="errors.any()" style="color: red; float: right;" >
+                              veuillez s' assurer des champs au dessus
+                            </span><br>
+              <!--______________ form buttons _____________ -->
+              <button :disabled="errors.any()" style="margin-top: 15px" style="float: right;" type="submit" class="btn btn-success" v-on:click="submitForm" >
+                  <i class="fa fa-plus"></i>  Ajouter
+              </button>
+            </div>
+          </form> 
         </div>
       </div>
     </div>    
@@ -119,11 +126,14 @@
         data() {
             return{
                 titre : '',
+                nbch : '',
+                cpch : '',
                 chargement: true
             }
         },
         methods: {
             submitForm() {
+                // return true;
                 this.$validator.validateAll().then(res=>{
                     if(res) {
                         return true;

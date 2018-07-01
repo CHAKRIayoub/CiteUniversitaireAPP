@@ -2,7 +2,7 @@
 @section('content')
 <style type="text/css">
   #app{
-  font-size: 17px;
+  font-size: 16px;
   }
 </style>
 <!-- __________________________________HTML_____________________________________________ -->
@@ -10,23 +10,24 @@
 <div class="right_col" role="main">
   <div class="">
     <!-- ____________________ content Titre ________________________ -->    
-    <div class="page-title">
-      <div style="float: left; font-size: medium; width: 100%">
-        <ol class="breadcrumb" style="background-color: #eee">         
-          <li><a href="/home">
-            <i class="fa fa-home"></i> Acceuil
-          </a></li>
-          <li><a href="/home">
-            <i class="fa fa-list-ol"></i> Résultat de Selection
-          </a></li>
-          <li class="active">
-            <i class="fa fa-book"></i> Information d'un dossier
-          </li>  
-        </ol>
-      </div>
-    </div>
+  <div class="page-title">
+    
+  </div>
     <!-- ____________________ content body ________________________ -->
     <div class="row" id="app">
+      <div style="float: left; font-size: medium; width: 100%">
+      <ol class="breadcrumb" style="background-color: #eee">         
+        <li><a href="/home">
+          <i class="fa fa-home"></i> Acceuil
+        </a></li>
+        <li><a href="/inscriptions">
+          <i class="fa fa-list-ol"></i> Résultat de Selection
+        </a></li>
+        <li>
+          <i class="fa fa-book"></i> Information d'un dossier
+        </li>  
+      </ol>
+    </div>
       <div class="x_content">
         <div class="x_panel">  
           <div class="x_title">
@@ -37,7 +38,11 @@
             <div class="col-lg-3 col-md-3">
               <center>
                 <span class="text-left">
-                <img src="{{ asset("images/user.png") }}"  class="img-responsive img-thumbnail">
+                  @if ($dossier->genre == 'masculin')
+                    <img src="{{ asset("images/boy.png") }}"  class="img-responsive ">
+                  @else
+                    <img src="{{ asset("images/girl.png") }}"  class="img-responsive img-thumbnail">
+                  @endif
                 </span>
               </center>
               <div class="table-responsive panel">
@@ -75,7 +80,7 @@
                         </tr>
                         <tr>
                           <td class="text-success"><i class="fa fa-user"></i> Nom Complet</td>
-                          <td>English</td>
+                          <td>{{ $dossier->nom }} {{ $dossier->prenom }}</td>
                         </tr>
                         <tr>
                           <td class="text-success"><i class="fa fa-map-marker"></i> Lieu Naissance</td>

@@ -11,9 +11,24 @@ use App\Hebergement;
 use App\Chambre;
 use App\Bloc;
 use Session;
+use \Auth;
+
 
 class InscriptionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $droits = explode(",",Auth::user()->droits);
+            if (in_array("gestion des dossiers", $droits) || 
+                Auth::user()->role == 'admin'){
+                return $next($request);
+            }else{
+                return redirect('/employe');
+            }
+        }); 
+    }
+
     public function reserver($id){
 
         $user = User::findOrFail($id);
@@ -55,20 +70,16 @@ class InscriptionsController extends Controller
         $dated = strtotime($app->date_d);
         $datef = strtotime($app->date_f);
         $datec = strtotime(date('y-m-d'));
-        
-        if ( ($datec >= $dated) && ($datef >= $datec ) ){
+        $p = ($datec >= $dated) && ($datef >= $datec );
+    
+        $rtrn_boy = Dossier::list_accpt('masculin');
+        $rtrn_girl = Dossier::list_accpt('feminin');
 
-            return view('employe.inscriptions.dateinv');
-
-        }else{
-
-            $selected_dossiers_boy = Dossier::list_accpt('masculin');
-            $selected_dossiers_girls = Dossier::list_accpt('feminin');
-
-        return view('employe.inscriptions.index',[ 'dossiers_b'=> $selected_dossiers_boy ,'dossiers_g'=> $selected_dossiers_girls ]);
-
-      }
-
+        return view('employe.inscriptions.index',[ 
+            'rtrn_boy' => $rtrn_boy,
+            'rtrn_girl' => $rtrn_girl,
+            'periode_inscription'        => $p
+        ]);
     }
 
 

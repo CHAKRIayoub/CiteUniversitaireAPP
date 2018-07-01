@@ -27,16 +27,25 @@
     <!-- ____________  alert ___________ -->
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-        <strong>{{ $message }}</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <strong>{{ $message }}</strong> 
+    </div>
+    @endif
+    <!-- ____________  alert ___________ -->
+    @if ($message = Session::get('danger'))
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <strong>{{ $message }}</strong> 
     </div>
     @endif
     <div class="x_content">
       <div class="x_panel">
         <div class="x_title">
-          <div class="h3"><i class="fa fa-building-o"></i> Liste Des Blocs </div>   
+          <div class="h3"><i class="fa fa-building-o"></i> Liste Des Blocs </div>
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -44,61 +53,71 @@
             <input class="form-control" style="font-size: 18px" placeholder="Chercher"  type="text" id="mysearch"><br>
           </div>
             <!-- ____________  table liste des blocs ___________ -->
-          <table id="datatable-buttons" class="table table-striped table-hover">
-              <thead>
-                  <tr>
-                      <th>#ID <i class="fa fa-sort"></i></th>
-                      <th>Titre <i class="fa fa-sort"></i></th>
-                      <th>Genre <i class="fa fa-sort"></i></th>
-                      <th>Date <i class="fa fa-sort"></i></th>
-                      <th>Nombres des chambres <i class="fa fa-sort"></i></th>
-                      <th>Actions</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  @foreach ($blocs as $bloc)
-                      <tr>
-                          <td>{{ $bloc->id }}</td>
-                          <td>{{ $bloc->titre }}</td>
-                          <td>{{ $bloc->genre }}</td>
-                          <td>{{ $bloc->created_at }}</td>
-                          <td>{{ $bloc->chambres_count }}</td>
-                          <td>
-                              <!-- ____________  button modifier ___________ -->
-                              <a  data-toggle="tooltip" 
-                                  data-placement="bottom" 
-                                  data-original-title="modifier"
-                                  href="{{ url('blocs/' .$bloc->id. '/edit') }}" 
-                                  >
-                                  <i class="fa fa-edit fa-lg"></i>
-                              </a>&nbsp;&nbsp;
-                              
-                              <!-- ____________  formulaire supprimer ___________ -->
-                              {!! Form::open([
-                                  'method' => 'DELETE',
-                                  'url' => ['blocs', $bloc->id  ],
-                                  'style' => 'display:inline',
-                                  'id' => $bloc->id,
-                              ]) !!}
-
-                                  <!-- ____________  button supprimer ___________ -->
-                                  <a  data-toggle="tooltip" 
-                                      data-placement="bottom" 
-                                      data-original-title="supprimer"
-                                      onclick="app.blocName='{{ $bloc->titre }}';
-                                              app.del({{ $bloc->id }});
-                                                   return false;">
-
-                                      <i style="color:tomato;" class="fa fa-trash-o fa-lg" ></i> 
-                                  
-                                  </a>
-                                 
-                              {!! Form::close() !!}
-                          </td>      
-                      </tr>
-                  @endforeach
-              </tbody>
+          <table id="dtt" class="table table-striped table-hover table2excel">
+            <thead>
+              <tr>
+                <th>#ID <i class="fa fa-sort"></i></th>
+                <th>Titre <i class="fa fa-sort"></i></th>
+                <th>Genre <i class="fa fa-sort"></i></th>
+                <th>Nombres des chambres <i class="fa fa-sort"></i></th>
+                <th>Date création <i class="fa fa-sort"></i></th>
+                <th>Date modification <i class="fa fa-sort"></i></th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($blocs as $bloc)
+                <tr>
+                  <td>{{ $bloc->id }}</td>
+                  <td>{{ $bloc->titre }}</td>
+                  <td>{{ $bloc->genre }}</td>
+                  <td>{{ $bloc->chambres_count }}</td>
+                  <td>{{ $bloc->created_at }}</td>
+                  <td>{{ $bloc->updated_at }}</td>
+                  <td>
+                    <!-- ____________  button modifier ___________ -->
+                    <a data-toggle="tooltip" 
+                       data-placement="bottom" 
+                       data-original-title="modifier"
+                       href="{{ url('blocs/' .$bloc->id. '/edit') }}">
+                      <i class="fa fa-edit fa-lg"></i>
+                    </a>&nbsp;&nbsp;
+                    <!-- ____________  formulaire supprimer ___________ -->
+                    {!! Form::open([
+                        'method' => 'DELETE',
+                        'url' => ['blocs', $bloc->id  ],
+                        'style' => 'display:inline',
+                        'id' => $bloc->id,
+                    ]) !!}
+                    <!-- _________  button supprimer _______ -->
+                    <a data-toggle="tooltip" 
+                       data-placement="bottom" 
+                       data-original-title="supprimer"
+                       onclick="app.blocName='{{ $bloc->titre }}';
+                                app.del({{ $bloc->id }});
+                                     return false;">
+                      <i style="color:tomato;" class="fa fa-trash-o fa-lg" ></i> 
+                    </a>        
+                    {!! Form::close() !!}
+                  </td>      
+                </tr>
+              @endforeach
+            </tbody>
           </table>
+          <div class="col-md-4 drpdn">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-download" ></i> Exporter
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a id="expdf" >
+                <i class="fa fa-file-pdf-o" ></i> PDF
+              </a></li>
+              <li><a id="exexcel">
+                <i class="fa fa-file-excel-o" ></i> Excel
+              </a></li>
+            </ul>
+          </div><br><br><br><br><br>
         </div>
       </div>        
     </div>
@@ -107,6 +126,7 @@
   <modal :show="show" @close="show = false" @confirm="deleteBloc" @cancel="cancelDel">
     <h4>voulez-vous vraiment supprimer le bloc "<strong>@{{ blocName }}</strong>" ?</h4>
   </modal>
+  <div id="dvjson"></div>
   <!-- ____________  chrgement ___________ -->
   <transition name="modal" v-if="chargement" >
       <div class="loading-mask">
@@ -118,6 +138,11 @@
 <!-- ____________  required files  ___________ -->
 <script src="{{asset("js/datatables/jquery.dataTables.min.js")}}"></script>
 <script src="{{ asset("js/vue.js")}}"></script>
+<script src="{{ asset("js/excelexportjs.js")}}"></script>
+<script src="{{ asset("js/jspdf.min.js")}}"></script>
+<script src="{{ asset("js/jspdf.plugin.autotable.js")}}"></script>
+<script src="{{ asset("js/functions.js")}}"></script>
+
 <!-- ____________  template modal confirmez suppresion  ___________ -->
 <script type="text/x-template" id="modal-template">
     <transition name="modal">
@@ -147,115 +172,97 @@
 <script>
     //____________  modal component  ___________ -->
     Vue.component('modal', {
-        template: '#modal-template',
-        props: ['show'],
-        methods: {
-            closeM: function () {      
-                this.$emit('close');
-            },
-            sendConfirm: function () {      
-                this.$emit('confirm');
-            },
-            sendCancel: function () {      
-                this.$emit('cancel');
-            }
+      template: '#modal-template',
+      props: ['show'],
+      methods: {
+        closeM: function () {      
+          this.$emit('close');
         },
-        mounted: function () {  
-            document.addEventListener("keydown", (e) => {        
-                if (this.show && e.keyCode == 27) {            
-                    this.closeM();
-                }    
-            });
+        sendConfirm: function () {      
+          this.$emit('confirm');
+        },
+        sendCancel: function () {      
+          this.$emit('cancel');
         }
+      },
+      mounted: function () {  
+        document.addEventListener("keydown", (e) => {        
+          if (this.show && e.keyCode == 27) {            
+            this.closeM();
+          }    
+        });
+      }
     });
     //____________  Vue instance  ___________ -->
     var app = new Vue({
-        el: '#app',
-        data: {
-            show: false, 
-            delvar: false,
-            idtodel: '',
-            blocName: " ",
-            chargement: true
+      el: '#app',
+      data: {
+        show: false, 
+        delvar: false,
+        idtodel: '',
+        blocName: " ",
+        chargement: true
+      },
+      methods:{
+        del : function(id, l){
+          //this.blocName = l;
+          this.show = true;
+          this.idtodel = id;
         },
-        methods:{
-            del : function(id, l){
-                //this.blocName = l;
-                this.show = true;
-                this.idtodel = id;
-            },
-            deleteBloc : function (btn) {
-                $('#'+this.idtodel).submit();
-            },
-            cancelDel:function (btn) {
-                this.show = false;
-                this.idtodel = '';
-            }
+        deleteBloc : function (btn) {
+          $('#'+this.idtodel).submit();
         },
-        mounted: function () {  
-            this.chargement = false;
-            $('.row').addClass('animated fadeInUp');
+        cancelDel:function (btn) {
+          this.show = false;
+          this.idtodel = '';
         }
+      },
+      mounted: function () {  
+        this.chargement = false;
+        $('.row').addClass('animated fadeInUp');
+      }
     });
 </script>
-<!-- //____________  data table and buttons  ___________ -->
+<!-- //____________  data table and exports  ___________ -->
 <script>
-  var table = $('#datatable-buttons').DataTable({
+  //datatable
+  var table = $('#dtt').DataTable({
     "dom": "tp",
   });
+  //datatable search
   $('#mysearch').keyup(function() {
     table.search($(this).val()).draw();
   })
-  // var handleDataTableButtons = function() {
-  //     "use strict";
-  //     0 !== $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
-  //       dom: "t",
-  //       buttons: [{
-  //         extend: "excel",
-  //         text:'<i class="fa fa-file-excel-o"></i> pdf',
-  //         className: "btn btn-success btn-lg",
-  //         exportOptions: {
-  //               columns: [0,1,2,3,4] 
-  //         },
-  //         title: "liste_blocs"
-  //       }, {
-  //         extend: "pdf",
-  //         text:      '<i class="fa fa-file-pdf-o"></i> Excel',
-  //         className: "btn btn-danger btn-lg",
-  //         exportOptions: {
-  //               columns: [0,1,2,3,4] 
-  //         },
-  //         title: "liste_blocs"
-  //       }],
-  //       responsive: !0
-  //     })
-  //   },
-  //   TableManageButtons = function() {
-  //     "use strict";
-  //     return {
-  //       init: function() {
-  //         handleDataTableButtons()
-  //       }
-  //     }
-  //   }();
-</script>
-<script type="text/javascript">
-  // $(document).ready(function() {
-  //   $('#datatable-keytable').DataTable({
-  //     keys: true
-  //   });
-  //    $('#datatable-responsive').DataTable();
-  //   $('#datatable-scroller').DataTable({
-  //     ajax: "js/datatables/json/scroller-demo.json",
-  //     deferRender: true,
-  //     scrollY: 380,
-  //     scrollCollapse: true,
-  //     scroller: true
-  //   });
-  //   var table = $('#datatable-fixed-header').DataTable({
-  //     fixedHeader: true
-  //   });
-  // });
-  // TableManageButtons.init();
+
+  //list
+  var data = <?php echo json_encode($blocs); ?>;
+  datata = []
+  data.forEach(element => {
+      var item = Object.values(element)
+      item.splice(3,0,item[5])
+      datata.push(item)
+  });
+
+  //export pdf
+  urlimage = "{{ asset("images/header.PNG") }}";
+  $('#expdf').click(function(){
+      $.fn.exportPdf(
+        urlimage,
+        "liste_blocs.pdf",
+        "Liste Des Blocs",
+        "dtt", 
+        [6], 
+        [],
+        datata
+      );
+  }); 
+  //export excel
+  $('#exexcel').click(function(){
+    data.forEach(element => {
+      element.chambres = element.chambres_count;
+      delete element.chambres_count;
+    });
+    $.fn.exportExcel(data);
+  });
 </script>
 @endsection

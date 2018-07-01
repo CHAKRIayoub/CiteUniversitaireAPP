@@ -50,10 +50,10 @@
                 <th>ID <i class="fa fa-sort"></i> </th>
                 <th>Nom <i class="fa fa-sort"></i></th>
                 <th>Email <i class="fa fa-sort"></i></th>
-                <th>Role <i class="fa fa-sort"></i></th>
-                <th>Date Creation <i class="fa fa-sort"></i></th>
-                <th>Dernier Modification <i class="fa fa-sort"></i></th>
-                <th>Action</th>
+                <th>Droits d'accées <i class="fa fa-sort"></i></th>
+                <th>Création <i class="fa fa-sort"></i></th>
+                <th>Modification <i class="fa fa-sort"></i></th>
+                <th>Action </th>
               </tr>
             </thead>
             <tbody>
@@ -63,10 +63,16 @@
                 @endif
 
                 <tr>
-                  <td><strong>{{ $user->id }}</strong></td>
+                  <td width="50px" ><strong>{{ $user->id }}</strong></td>
                   <td> {{ $user->name }} </td>
                   <td>{{ $user->email }}</td>
-                  <td>{{ $user->role }}</td>
+                  <td width="300px">
+                    @foreach (explode(",", $user->droits) as $droit)
+                      <span class="btn btn-success btn-xs">
+                        <i class="fa fa-check-square-o"></i> {{ $droit }}
+                      </span>
+                    @endforeach
+                  </td>
                   <td>{{ $user->created_at }}</td>
                   @if(isset($user->updated_at))
                     <td>{{ $user->updated_at }}</td>
@@ -187,7 +193,9 @@
             delvar: false,
             idtodel: '',
             blocName: " ",
-            chargement: true
+            chargement: true,
+            colors:['success','primary','info','default','danger','warning'],
+
         },
         methods:{
             del : function(id, l){
@@ -206,7 +214,6 @@
         mounted: function () {  
             this.chargement = false;
             $('.row').addClass('animated fadeInUp');
-
         }
     });
 </script>

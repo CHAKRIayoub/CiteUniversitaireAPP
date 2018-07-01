@@ -32,6 +32,10 @@
         </div>
         @endif
 
+
+        
+
+
     <!-- ____________________ bouton précedent ________________________ -->    
     <a href="{{ url('dossier/0/edit') }}" style="float: right" class="btn btn-warning">
         <i class="fa fa-edit"></i> Modifier Votre Dossier
@@ -202,14 +206,13 @@
     </div>
 
 
-
-
     <!-- ____________  chrgement ___________ -->
     <transition name="modal" v-if="chargement" >
         <div class="loading-mask">    
             <div class="loader"></div>  
         </div>
     </transition>
+
    
 </div>
 

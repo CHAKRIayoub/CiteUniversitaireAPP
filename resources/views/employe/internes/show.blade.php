@@ -27,7 +27,6 @@
     </div>
    
     <div class="clearfix"></div>
-    <br><br>
     <!-- ____________________ content body ________________________ -->
     <div class="row" id="app">
       <div class="x_content">
@@ -40,7 +39,11 @@
             <div class="col-lg-3 col-md-3">
               <center>
                 <span class="text-left">
-                <img src="{{ asset("images/user.png") }}"  class="img-responsive img-thumbnail">
+                  @if ($dossier->genre == 'masculin')
+                    <img src="{{ asset("images/boy.png") }}"  class="img-responsive">
+                  @else
+                    <img src="{{ asset("images/girl.png") }}"  class="img-responsive">
+                  @endif
                 </span>
               </center>
               <div class="table-responsive panel">
@@ -61,7 +64,7 @@
                 <li><a data-toggle="tab" href="#BacInfos" class="text-success"><i class="fa fa-graduation-cap"></i> étude</a></li>
                 <li><a data-toggle="tab" href="#Address" class="text-success"><i class="fa fa-home"></i> Address</a></li>
                 <li><a data-toggle="tab" href="#Parent" class="text-success"><i class="fa fa-users"></i> Famille </a></li>
-                <li><a data-toggle="tab" href="#chambre" class="text-success"><i class="fa fa-users"></i> Chambre </a></li>
+                <li><a data-toggle="tab" href="#chambre" class="text-success"><i class="fa fa-bed"></i> Chambre </a></li>
                 <li><a data-toggle="tab" href="#papers" class="text-success"><i class="fa fa-file"></i> Dossier PDF </a></li>
               </ul>
               <div class="tab-content">
@@ -79,7 +82,7 @@
                         </tr>
                         <tr>
                           <td class="text-success"><i class="fa fa-user"></i> Nom Complet</td>
-                          <td>English</td>
+                          <td>{{ $dossier->nom }} {{ $dossier->prenom }}</td>
                         </tr>
                         <tr>
                           <td class="text-success"><i class="fa fa-map-marker"></i> Lieu Naissance</td>
@@ -169,7 +172,7 @@
                         </tr>
                         <tr>
                           <td class="text-success"><i class="fa fa-money"></i> Revenue</td>
-                          <td>{{$dossier->revenu}} DH</td>
+                          <td>{{ $dossier->revenue }} DH</td>
                         </tr>
                         <tr>
                           <td class="text-success"><i class="fa fa-users"></i> Nombre de frères et sœurs</td>
@@ -179,7 +182,7 @@
                     </table>
                   </div>
                 </div>
-                <div id="chambre" class="tab-pane fade in active">
+                <div id="chambre" class="tab-pane fade in">
                   <div class="table-responsive panel">
                     <table class="table">
                       <tbody>

@@ -16,16 +16,30 @@ use \Auth;
 
 class InternesController extends Controller
 {
+     public function __construct()
+        {
+            $this->middleware(function ($request, $next) {
+                $droits = explode(",",Auth::user()->droits);
+                if (in_array("gestion des residents", $droits) || 
+                    Auth::user()->role == 'admin'){
+                    return $next($request);
+                }else{
+                    return redirect('/employe');
+                }
+            }); 
+        }
     
     public function index()
     {
-        
-       $users = User::has('hebergement')->get();
-       $dossiers = array();
-       foreach ($users as $key => $value) {
-           $dossiers[] = $value->dossier;
-       }
-
+            
+        $users = User::has('hebergement')->get();
+        $dossiers = array();
+        foreach ($users as $key => $value) {
+            $h = Hebergement::where('user_id', '=', $value->id)->get();
+            $c = Chambre::where('id','=',$h[0]->chambre_id )->first();
+            $value->dossier->chambre = $c;
+            $dossiers[] = $value->dossier;
+        }
         return view('employe.internes.index',[ 'dossiers'=> $dossiers ]);
     }
 
@@ -42,7 +56,6 @@ class InternesController extends Controller
     public function show($id)
     {
         $h = Hebergement::where('user_id','=',$id )->get();
-        
         $d = Dossier::where('user_id','=',$id )->first();
         $c = Chambre::where('id','=',$h[0]->chambre_id )->first();
 
@@ -64,9 +77,9 @@ class InternesController extends Controller
     public function destroy($id)
     {
         $dossier = Dossier::findOrFail($id);
-        User::destroy($dossier->user_id);
+        $h = Hebergement::where('user_id', '=', $dossier->user_id)->first();
+        Hebergement::destroy($h->id);
         Dossier::destroy($id);
-
         Session::flash('success', 'Dossier supprimée avec succées ');
         return redirect('/internes');
     }

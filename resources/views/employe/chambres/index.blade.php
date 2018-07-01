@@ -31,6 +31,15 @@
             <strong>{{ $message }}</strong> 
           </div>
         @endif
+        <!-- ____________  alert ___________ -->
+        @if ($message = Session::get('danger'))
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <strong>{{ $message }}</strong> 
+        </div>
+        @endif
         <div class="x_content">
           <div class="x_panel">  
             <div class="x_title">
@@ -41,7 +50,7 @@
               <div class="col-md-4 col-md-offset-8 " >
                 <input class="form-control" style="font-size: 18px" placeholder="Chercher"  type="text" id="mysearch"><br>
               </div>
-              <table class="table table-striped table-hover" id="datatable-buttons">
+              <table class="table table-striped table-hover" id="dtt">
                 <thead>
                   <tr style="background-color: #2a3f54; color: white; " >
                     <th>#ID <i class="fa fa-sort"></i></th>
@@ -83,6 +92,20 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="col-md-4 drpdn">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-download" ></i> Exporter
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <li><a href="#" id="expdf">
+                    <i class="fa fa-file-pdf-o" ></i> PDF
+                  </a></li>
+                  <li><a href="#" id="exexcel">
+                    <i class="fa fa-file-excel-o" ></i> Excel
+                  </a></li>
+                </ul>
+              </div><br><br><br><br><br>
             </div>
           </div>
         </div>
@@ -102,6 +125,10 @@
 <!-- ____________  required files  ___________ -->
 <script src="{{ asset("js/datatables/jquery.dataTables.min.js")}}"></script>
 <script src="{{ asset("js/vue.js")}}"></script>
+<script src="{{ asset("js/excelexportjs.js")}}"></script>
+<script src="{{ asset("js/jspdf.min.js")}}"></script>
+<script src="{{ asset("js/jspdf.plugin.autotable.js")}}"></script>
+<script src="{{ asset("js/functions.js")}}"></script>
 <!-- ____________  template modal confirmez suppresion  ___________ -->
 <script type="text/x-template" id="modal-template">
     <transition name="modal">
@@ -184,11 +211,38 @@
 </script>
 <!-- //____________  data table   ___________ -->
 <script>
-  var table = $('#datatable-buttons').DataTable({
+  var table = $('#dtt').DataTable({
     "dom": "tp"
   });
   $('#mysearch').keyup(function() {
     table.search($(this).val()).draw();
   })
+  var data = <?php echo json_encode($chambres); ?>;
+  var datata = [];
+  data.forEach(element => {
+      element.bloc = element.bloc.titre
+      delete element.bloc_id
+      var item = Object.values(element)
+      item.splice(1,0,"----")
+      item.splice(3,1,"----")
+      item.splice(4,2,item[5])
+      datata.push(item)
+  });
+  //export pdf
+  urlimage = "{{ asset("images/header.PNG") }}";
+  $('#expdf').click(function(){
+      $.fn.exportPdf(
+        urlimage,
+        "liste_chambres.pdf",
+        "Liste Des Chambres",
+        "dtt", 
+        [1,3],
+        ['bloc'], 
+        datata);
+  }); 
+  //export excel 
+  $('#exexcel').click(function(){
+    $.fn.export(data);
+  });
 </script>
 @endsection

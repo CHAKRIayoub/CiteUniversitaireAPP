@@ -7,36 +7,39 @@ use App\Http\Controllers\Controller;
 use App\Bloc;
 use Session;
 use App\Chambre;
+use \Auth;
+use App\User;
+use App\Hebergement;
+
 
 class BlocController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $droits = explode(",",Auth::user()->droits);
+            if (in_array("gestion des blocs", $droits) || 
+                Auth::user()->role == 'admin'){
+                return $next($request);
+            }else{
+                return redirect('/employe');
+            }
+        }); 
+    }
+   
     public function index()
     {
         $blocs = Bloc::withCount('chambres')->get();
         return view('employe.blocs.index', ['blocs' => $blocs] );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create()
     {
         return view('employe.blocs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
         
@@ -69,36 +72,19 @@ class BlocController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         $bloc = Bloc::findOrFail($id);
         return view('employe.blocs.edit', ['bloc' => $bloc] );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -117,19 +103,27 @@ class BlocController extends Controller
         return redirect('/blocs');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
         $bloc = Bloc::findOrFail($id);
+        foreach ($bloc->chambres as $key => $chambre) {
+            if($chambre->hebergements->count() > 0){
+                Session::flash('danger', 
+                    'vous ne pouvez pas supprimer le bloc "'.$bloc->titre.'"
+                    , il existe des Résidents dans les chambres du bloc');
+                return redirect('/blocs');
+            }
+        }
+       
+        foreach ($bloc->chambres as $key => $value) {
+            Chambre::destroy($value->id);
+        }
         Bloc::destroy($id);
+        
+
 
         Session::flash('success', 'Bloc"'. $bloc->titre .'" supprimée avec succées ');
-
         return redirect('/blocs');
     }
 }

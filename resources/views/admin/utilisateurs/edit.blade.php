@@ -55,8 +55,8 @@
         <!-- ____________  fomr div ___________ -->
         <div class="col-md-10 col-xs-12 col-md-offset-1 ">
           <!-- ____________  form ___________ -->
-          <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('utilisateurs.store') }}">
-            {{ csrf_field() }}
+          <form id="form" class="form-horizontal form-label-left" method="POST" action="{{ route('utilisateurs.update', $user->id) }}">
+            {{ csrf_field() }} {{ method_field('PATCH') }}
             <!-- ____________  chrgement ___________ -->
             <transition name="modal" v-if="chargement" >
               <div class="loading-mask">    
@@ -70,14 +70,14 @@
               Nom et Prenom * <span class="required"></span>
             </label>
             <div class="col-md-8 col-sm-12 col-xs-12">  
-                <input class="form-control" type="text" name="name">
+                <input value="{{ $user->name }}" class="form-control" type="text" name="name">
             </div><br><br><br>
             
             <label class="control-label col-md-2 col-sm-2 col-xs-12" >
               E-mail * <span class="required"></span>
             </label>
             <div class="col-md-8 col-sm-12 col-xs-12">
-              <input class="form-control" type="email" name="email">
+              <input value="{{ $user->email }}" class="form-control" type="email" name="email">
             </div><br><br><br>
 
             <label class="control-label col-md-2  col-sm-2 col-xs-12">
@@ -92,22 +92,22 @@
             </label>
             <div class="col-md-8 col-sm-12 col-xs-12">
               <select class="form-control" name="droits[]" multiple="multiple">
-                <option value="b">
+                                <option value="gestion des blocs">
                   Gestion des Blocs
                 </option>
-                <option value="c">
+                <option value="gestion des chambres">
                   Gestion des Chambres
                 </option>
-                <option value="d">  
+                <option value="gestion des dossiers">  
                   Gestion des Dossiers
                 </option>
-                <option value="i">
+                <option value="gestion des residents">
                   Gestion des Internes
                 </option>
-                <option value="r">
+                <option value="gestion des regles">
                   Gestion des Régles
                 </option>
-                <option value="dt">
+                <option value="gestion des dates">
                   Gestion des Dates
                 </option>
               </select>
