@@ -1,4 +1,4 @@
- @auth
+@auth
 
  <div class="col-md-3 left_col">
         
@@ -28,21 +28,8 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
-            @if (Auth::user()->role == "admin")
-             
-                @include('admin.menu') 
+            @include('admin.menu') 
 
-            @elseif (Auth::user()->role == "employe")
-
-                @include('employe.menu') 
-           
-            @elseif (Auth::user()->role == "etudiant")
-
-                @include('etudiant.menu') 
-
-            @endif
-
-          
           </div>
           <!-- /sidebar menu -->
 

@@ -8,10 +8,10 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Session;
 class UtilisateursController extends Controller
-{
+{ 
     
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.   
      *
      * @return \Illuminate\Http\Response
      */

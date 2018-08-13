@@ -1,13 +1,6 @@
 <?php
 
 
-// $url = parse_url(getenv("DATABASE_URL"));
-$host = "fdb17.biz.nf";
-$username = "2330603_etudiants";
-$password = "Etudiants2017";
-$database = "2330603_etudiants";
-$port = 3306;
-
 return [
 
     /*
@@ -21,7 +14,7 @@ return [
     |
     */
 
-    'default' => 'mysql_production',
+    'default' => 'sqlite',
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +36,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' =>  __DIR__.'/../storage/database/base.onousc',
             'prefix' => '',
         ],
 
@@ -64,11 +57,11 @@ return [
 
         'mysql_production' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST',$host),
-            'port' => env('DB_PORT',$port),
-            'database' => env('DB_DATABASE',$database),
-            'username' => env('DB_USERNAME',$username),
-            'password' => env('DB_PASSWORD',$password),
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

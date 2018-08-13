@@ -153,9 +153,8 @@ class DossierController extends Controller
         $dossier->CalculNote();
         $dossier->save();
         Session::flash('success', 'votre dossier est modifié avec succées');
+ 
         return redirect('/dossier');
+ 
     }
-
-   
-  
 }

@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+
+use App\User;
 // ------------------------------------------------------Authentification Routes
 
 Auth::routes();
@@ -25,6 +28,8 @@ Route::post('/upl', 'TestController@upl');
 Route::middleware(['auth','ChekRole:admin'])->group(function () {
   Route::get('/admin', 'AdminController@index' );
   Route::resource('/utilisateurs','admin\\UtilisateursController');
+  Route::resource('/import','admin\\ExportController', ['except' => ['destroy', 'create','edit', 'update']]);
+
 });
 
 // --------------------------------------------------Employée and admin Routes

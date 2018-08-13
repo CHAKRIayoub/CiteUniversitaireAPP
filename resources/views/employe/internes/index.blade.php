@@ -11,10 +11,10 @@
       <ol class="breadcrumb" style="background-color: #eee">         
         <li><a href="/home">
           <i class="fa fa-home"></i> Acceuil
-        </a></li>
+        </a></li> &nbsp;
         <li class="active">
           <i class="fa fa-users"></i> Gestion des Résidents
-        </li>  
+        </li> 
       </ol>
     </div>
   </div>
@@ -41,10 +41,11 @@
             <li class="active" >
               <a data-toggle="tab" href="#boys" role="tab">
                 <h5>
-                  <i class="fa fa-male"></i> Masculin
+                  <i class="fa fa-male"></i> Masculin  
                 </h5>
               </a>
             </li>
+
             <li>
               <a data-toggle="tab" href="#girls" role="tab" >
                 <h5>
